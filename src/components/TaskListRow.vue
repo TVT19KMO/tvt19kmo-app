@@ -1,10 +1,10 @@
 <template>
   <tr>
     <th scope="row">{{ name }}</th>
-    <td>{{ note }}</td>
+    <td>{{ noteToShow }}</td>
     <td>{{ points }}</td>
     <td>{{ room }}</td>
-    <td>
+    <td class="flex">
       <BaseButton>Edit</BaseButton>
       <BaseButton>Delete</BaseButton>
     </td>
@@ -29,6 +29,12 @@ export default {
     room: {
       type: String,
       required: true,
+    },
+  },
+
+  computed: {
+    noteToShow() {
+      return this.note.length > 50 ? `${this.note.slice(0, 50)}...` : this.note;
     },
   },
 };

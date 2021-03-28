@@ -8,4 +8,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped lang="postcss">
+footer {
+  @apply p-5 text-center text-white;
+}
+</style>

@@ -1,6 +1,6 @@
 <template>
-  <header class="bg-gray-900 text-white flex justify-between">
-    <h1>Placeholder</h1>
+  <header class="bg-gray-900 text-white flex items-center justify-between">
+    <h1 class="p-5 font-semibold">Placeholder</h1>
     <nav>
       <ul class="mx space-x-5">
         <li><a href="#">Tasks</a></li>

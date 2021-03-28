@@ -25,18 +25,22 @@ export default {
 };
 </script>
 
-<style scoped lang="postcss">
+<style lang="postcss">
 table {
-  @apply border-collapse mx-6 text-sm font-sans shadow-md;
+  @apply border-collapse mx-6 text-sm font-sans shadow-lg bg-gray-700 p-10;
+}
+
+tr th {
+  @apply text-left;
 }
 
 thead tr {
-  @apply bg-gray-300 text-white text-left;
+  @apply text-white text-left;
 }
 
 th,
 td {
-  @apply py-3 px-4;
+  @apply py-3 px-4 text-gray-100;
 }
 
 tbody tr {
@@ -44,11 +48,7 @@ tbody tr {
 }
 
 tbody tr:nth-of-type(even) {
-  @apply bg-red-400;
-}
-
-tbody tr:last-of-type {
-  border-bottom: 2px solid #009879;
+  @apply bg-gray-600;
 }
 
 td > * {

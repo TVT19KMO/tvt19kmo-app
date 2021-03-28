@@ -1,11 +1,15 @@
 <template>
-  <TheHeader />
-  <div class="mx-auto flex">
-    <h2>Tasks</h2>
-    <TaskList class="w-2/3 max-w-6xl" />
-    <CreateTask class="" />
+  <div class="min-h-screen">
+    <TheHeader />
+    <main class="container mx-auto">
+      <h2 class="mt-5 ml-5 text-white text-xl font-bold">Tasks</h2>
+      <div class="my-10 flex items-start space-x-5">
+        <TaskList class="w-full" />
+        <CreateTask class="hidden lg:inline-block w-96" />
+      </div>
+    </main>
+    <TheFooter />
   </div>
-  <TheFooter />
 </template>
 
 <script>

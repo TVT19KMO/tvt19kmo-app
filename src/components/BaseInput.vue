@@ -47,4 +47,14 @@ input[type='radio'] {
 input[type='radio'] {
   bottom: 2px;
 }
+
+input[type='range']::-webkit-slider-thumb {
+  background: red;
+}
+input[type='range']::-moz-range-thumb {
+  background: red;
+}
+input[type='range']::-ms-thumb {
+  background: red;
+}
 </style>
