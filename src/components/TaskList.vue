@@ -9,13 +9,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="task in tasks" :key="task.name">
-        <td>{{ task.name }}</td>
-        <td>{{ task.note }}</td>
-        <td>{{ task.points }}</td>
-        <td>{{ task.room }}</td>
-        <td><BaseButton>Edit</BaseButton><BaseButton>Delete</BaseButton></td>
-      </tr>
+      <TaskListRow v-for="task in tasks" v-bind="task" :key="task.name" />
     </tbody>
   </table>
 </template>
@@ -23,7 +17,11 @@
 <script>
 import faker from 'faker';
 
+import TaskListRow from './TaskListRow.vue';
+
 export default {
+  components: { TaskListRow },
+
   data() {
     return {
       tasks: Array.from({ length: 10 }).map((_) => ({
