@@ -1,6 +1,6 @@
 <template>
   <h2 class="text-lg">Create Task</h2>
-  <form class="flex flex-col">
+  <form class="flex flex-col w-48">
     <label>
       Name:
       <input type="text" name="task-name" class="shadow-sm" />
