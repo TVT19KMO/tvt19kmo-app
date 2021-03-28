@@ -17,6 +17,10 @@ This is an application developed for Product Design and Development course.
 * `npm run lint` - Lints (formats) the code based on some pre-defined code-styling rules.
 * `npm run build` - Builds the project for development.
 
+### Recommended VSCode setup tutorial:
+https://code.visualstudio.com/docs/nodejs/vuejs-tutorial
+
+
 ### Docs for developers:
 * framework - [Vue 3](https://v3.vuejs.org/guide/introduction.html)
 * tooling - [Vite](https://vitejs.dev/)
