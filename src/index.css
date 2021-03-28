@@ -1,6 +1,15 @@
 @tailwind base;
-
 @tailwind components;
-@import './styles/_buttons.css';
-
 @tailwind utilities;
+
+@layer base {
+  table {
+    @apply border-collapse;
+  }
+  tr {
+    @apply border border-black;
+  }
+  td > * {
+    @apply ml-1;
+  }
+}
