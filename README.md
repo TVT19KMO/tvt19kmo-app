@@ -3,12 +3,13 @@ This is an application developed for Product Design and Development course.
 
 
 ### To start developing the app:
-1. Clone this directory (prefer SSH)
-2. Run `npm install`
-3. Create a new branch `git checkout -b feature-name`
-4. Run `npm run dev`
-5. Start developing!
-6. Create a pull request to main when you are done :).
+1. Install [Vue CLI](https://cli.vuejs.org/guide/installation.html)
+2. Clone this directory (prefer SSH)
+3. Run `npm install`
+4. Create a new branch `git checkout -b feature-name`
+5. Run `npm run dev`
+6. Start developing!
+7. Create a pull request to main when you are done. :)
 
 ### NPM commands:
 * `npm run dev` - Starts development server (allows you to see changes in real-time)
