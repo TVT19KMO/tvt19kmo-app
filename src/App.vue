@@ -1,19 +1,13 @@
 <template>
-  <div class="wrapper">asdasd</div>
+  <div class="container mx-auto">
+    <CreateTask />
+  </div>
 </template>
 
 <script>
+import CreateTask from '@/views/CreateTask.vue';
+
 export default {
+  components: { CreateTask },
 };
 </script>
-
-<style scoped lang="postcss">
-.wrapper {
-  @apply text-red-50;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  margin-top: 60px;
-}
-</style>
