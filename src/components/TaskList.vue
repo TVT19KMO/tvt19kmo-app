@@ -1,17 +1,15 @@
 <template>
-  <table>
-    <thead>
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Note</th>
-        <th scope="col">Points</th>
-        <th scope="col">Room</th>
-      </tr>
-    </thead>
-    <tbody>
+  <BaseTable>
+    <template #head>
+      <th scope="col">Name</th>
+      <th scope="col">Note</th>
+      <th scope="col">Points</th>
+      <th scope="col">Room</th>
+    </template>
+    <template #default>
       <TaskListRow v-for="task in tasks" v-bind="task" :key="task.name" />
-    </tbody>
-  </table>
+    </template>
+  </BaseTable>
 </template>
 
 <script>

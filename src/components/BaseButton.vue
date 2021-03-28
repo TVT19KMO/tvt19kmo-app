@@ -8,6 +8,8 @@ export default {};
 
 <style scoped lang="postcss">
 .button {
-  @apply inline-block text-white p-2 rounded-sm bg-indigo-700;
+  @apply inline-block px-3 py-2 rounded-sm;
+  @apply bg-indigo-700 text-white;
+  @apply text-center align-middle;
 }
 </style>
