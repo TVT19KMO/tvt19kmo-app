@@ -2,10 +2,10 @@
   <table>
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Note</th>
-        <th>Points</th>
-        <th>Room</th>
+        <th scope="col">Name</th>
+        <th scope="col">Note</th>
+        <th scope="col">Points</th>
+        <th scope="col">Room</th>
       </tr>
     </thead>
     <tbody>

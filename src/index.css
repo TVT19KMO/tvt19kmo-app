@@ -4,11 +4,38 @@
 
 @layer base {
   table {
-    @apply border-collapse;
+    @apply border-collapse w-full mb-4 text-gray-800 border-gray-400 align-top;
+    caption-side: bottom;
   }
+
+  th,
+  td {
+    @apply p-1;
+    border-bottom-width: 1px;
+  }
+
+  table > tbody > tr:nth-of-type(odd) {
+    @apply bg-gray-800 text-white;
+  }
+
+  table > tbody > tr:nth-of-type(even) {
+    @apply bg-gray-600 text-white;
+  }
+
+  tbody,
+  td,
+  tfoot,
+  th,
+  thead,
   tr {
-    @apply border border-black;
+    @apply border-solid border-0;
+    border-color: inherit;
   }
+
+  th {
+    text-align: inherit;
+  }
+
   td > * {
     @apply ml-1;
   }

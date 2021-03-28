@@ -1,6 +1,6 @@
 <template>
   <tr>
-    <td>{{ name }}</td>
+    <th scope="row">{{ name }}</th>
     <td>{{ note }}</td>
     <td>{{ points }}</td>
     <td>{{ room }}</td>
