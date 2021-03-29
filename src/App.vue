@@ -35,8 +35,9 @@ export default {
 };
 </script>
 
-<style>
+<style lang="postcss">
 body {
   @apply bg-gray-800;
+  @apply font-sans text-base font-normal;
 }
 </style>
