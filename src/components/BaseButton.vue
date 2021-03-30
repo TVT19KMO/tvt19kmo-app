@@ -9,7 +9,7 @@ export default {};
 <style scoped lang="postcss">
 .button {
   @apply inline-block px-3 py-2 rounded-sm;
-  @apply bg-green-500 text-white font-semibold;
+  @apply bg-primary text-white font-semibold;
   @apply text-center align-middle;
 }
 </style>

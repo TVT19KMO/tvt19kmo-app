@@ -1,15 +1,15 @@
 <template>
   <BaseForm class="">
     <template #header>
-      <h2 class="text-lg">Create Task</h2>
+      <Header :type="h3" class="text-lg">Create Task</Header>
     </template>
 
     <BaseInput type="text" name="task-name">
       <template #label>Name:</template>
     </BaseInput>
 
-    <BaseInput class="w-full" :textarea="true" name="task-description">
-      <template #label>Description:</template>
+    <BaseInput class="w-full" :textarea="true" name="task-note">
+      <template #label>Note:</template>
     </BaseInput>
 
     <BaseInput type="range" name="task-points">
@@ -20,7 +20,7 @@
       <template #label>Repeating:</template>
     </BaseInput>
 
-    <BaseButton type="submit">Create</BaseButton>
+    <template #submit>Create</template>
   </BaseForm>
 </template>
 

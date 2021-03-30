@@ -23,10 +23,18 @@ export default {
   data() {
     return {
       tasks: Array.from({ length: 10 }).map((_) => ({
-        name: faker.lorem.words(2),
+        name: faker.random.arrayElement([
+          'Empty trash',
+          'Dust windowsills',
+          'Dust baseboards',
+          'Sort out-of-place items',
+          'Make beds',
+          'Carry laundry',
+          'Carry laundry',
+        ]),
         note: faker.lorem.sentence(),
         points: faker.datatype.number(20),
-        room: faker.lorem.word(),
+        room: faker.random.arrayElement(['kitchen', 'living room', 'restroom']),
       })),
     };
   },

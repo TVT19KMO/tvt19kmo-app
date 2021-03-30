@@ -5,6 +5,10 @@
     </header>
     <form>
       <slot></slot>
+
+      <BaseButton v-if="$slots.submit">
+        <slot name="submit"></slot>
+      </BaseButton>
     </form>
   </div>
 </template>
@@ -17,7 +21,7 @@ export default {
 
 <style scoped lang="postcss">
 .form-wrapper {
-  @apply p-5 bg-gray-700  shadow-lg;
+  @apply p-5 bg-dark shadow-lg;
 }
 
 header {
@@ -25,6 +29,6 @@ header {
 }
 
 form {
-  @apply flex flex-col space-y-3;
+  @apply flex flex-col space-y-4;
 }
 </style>

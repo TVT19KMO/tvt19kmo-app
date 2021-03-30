@@ -27,15 +27,15 @@ export default {
 
 <style lang="postcss">
 table {
-  @apply border-collapse mx-6 text-sm font-sans shadow-lg bg-gray-700 p-10;
+  @apply border-collapse mx-6 text-sm font-sans shadow-lg bg-dark p-10;
 }
 
 tr th {
   @apply text-left;
 }
 
-thead tr {
-  @apply text-white text-left;
+thead tr > * {
+  @apply text-primary text-left;
 }
 
 th,
@@ -44,11 +44,11 @@ td {
 }
 
 tbody tr {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #666;
 }
 
 tbody tr:nth-of-type(even) {
-  @apply bg-gray-600;
+  @apply bg-darker;
 }
 
 td > * {

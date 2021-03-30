@@ -28,19 +28,19 @@ export default {
 
 <style scoped lang="postcss">
 label {
-  @apply text-sm font-semibold text-blue-300 font-sans;
+  @apply text-sm font-semibold text-secondary font-sans;
 }
 
 input,
 textarea {
-  @apply block p-2 mt-1 bg-gray-200 text-gray-700 border rounded-md border-white text-left;
+  @apply block p-2 mt-1 bg-white text-gray-700;
+  @apply border rounded-sm w-full border-white text-left;
   @apply text-lg;
 }
 
 input[type='checkbox'],
 input[type='radio'] {
   vertical-align: middle;
-
   @apply ml-3 relative inline-block;
   bottom: 1px;
 }

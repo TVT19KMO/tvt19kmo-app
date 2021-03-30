@@ -10,6 +10,6 @@ export default {
 
 <style scoped lang="postcss">
 footer {
-  @apply p-5 text-center text-white;
+  @apply p-5 text-center text-white bg-darker w-full;
 }
 </style>

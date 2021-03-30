@@ -24,10 +24,10 @@ export default {
 .h4,
 .h5,
 .h6 {
-  @apply mb-2 font-medium;
+  @apply text-white mb-2 font-medium;
 }
 
 .h2 {
-  @apply text-white font-semibold text-xl;
+  @apply font-semibold text-xl;
 }
 </style>

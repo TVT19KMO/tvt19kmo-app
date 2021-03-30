@@ -1,11 +1,17 @@
 <template>
-  <header class="bg-gray-900 text-white flex items-center justify-between">
-    <h1 class="header-title">Child<span class="text-green-300">watch</span></h1>
+  <header class="bg-darker text-white flex items-center justify-between">
+    <a class="header-title" @click="$emit('navigate', '')"
+      >Child<span class="text-primary">watch</span></a
+    >
 
     <nav class="header-nav">
       <ul class="mx space-x-5">
-        <li><a @click="$emit('navigate', 'tasks')">Tasks</a></li>
-        <li><a @click="$emit('navigate', 'rewards')">Rewards</a></li>
+        <li class="header-nav-item">
+          <a @click="$emit('navigate', 'tasks')">Tasks</a>
+        </li>
+        <li class="header-nav-item">
+          <a @click="$emit('navigate', 'rewards')">Rewards</a>
+        </li>
       </ul>
     </nav>
   </header>
@@ -33,5 +39,9 @@ li {
 
 a {
   @apply inline-block p-4;
+}
+
+a:hover {
+  @apply bg-dark cursor-pointer;
 }
 </style>

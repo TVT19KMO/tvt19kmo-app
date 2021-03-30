@@ -20,7 +20,7 @@
       <template #label>Repeating:</template>
     </BaseInput>
 
-    <BaseButton type="submit">Create</BaseButton>
+    <template #submit>Create</template>
   </BaseForm>
 </template>
 

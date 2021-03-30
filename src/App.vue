@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="min-h-screen">
     <TheHeader @navigate="route = $event" />
     <main class="container mx-auto my-5">
       <!-- TODO: User router -->
@@ -7,7 +7,7 @@
       <TasksPage v-else-if="route === 'tasks'" />
       <RewardsPage v-else-if="route === 'rewards'" />
     </main>
-    <TheFooter />
+    <TheFooter class="fixed bottom-0" />
   </div>
 </template>
 
