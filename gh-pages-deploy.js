@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable */
 const execa = require('execa');
 const fs = require('fs');
 
