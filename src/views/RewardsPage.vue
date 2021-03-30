@@ -1,5 +1,5 @@
 <template>
-  <h2>Rewards</h2>
+  <Heading type="h2">Rewards</Heading>
 </template>
 
 <script>

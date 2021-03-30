@@ -1,7 +1,7 @@
 <template>
   <div>
     <TheHeader @navigate="route = $event" />
-    <main class="container mx-auto">
+    <main class="container mx-auto my-5">
       <!-- TODO: User router -->
       <MainPage v-if="route === ''" />
       <TasksPage v-else-if="route === 'tasks'" />

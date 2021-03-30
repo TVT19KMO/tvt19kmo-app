@@ -1,5 +1,5 @@
 <template>
-  <h2 class="mt-5 ml-5 text-white text-xl font-bold">Tasks</h2>
+  <Heading type="h2">Tasks</Heading>
   <div class="my-10 flex items-start space-x-5">
     <TaskList class="w-full lg:w-2/3" />
     <CreateTask class="hidden lg:inline-block lg:w-1/3" />

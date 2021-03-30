@@ -1,14 +1,16 @@
 <template>
-  <div class="flex">
-    <BaseList class="w-64">
+  <Heading type="h2"> Dashboard </Heading>
+
+  <div class="flex space-x-6">
+    <BaseList class="main-list">
       <template #header>
-        <Heading type="h2">Recent tasks</Heading>
+        <Heading type="h3">Recent tasks</Heading>
       </template>
     </BaseList>
 
-    <BaseList class="w-64">
+    <BaseList class="main-list">
       <template #header>
-        <Heading type="h2">Recent activity</Heading>
+        <Heading type="h3">Recent activity</Heading>
       </template>
     </BaseList>
   </div>
@@ -18,4 +20,8 @@
 export default {};
 </script>
 
-<style></style>
+<style lang="postcss" scoped>
+.main-list {
+  @apply w-64;
+}
+</style>

@@ -18,12 +18,27 @@ export default {
 <style lang="postcss">
 .list {
   @apply flex flex-col rounded-md;
-  @apply bg-gray-700 text-green-300;
+  @apply bg-dark text-green-300;
+  @apply shadow-xl;
 }
 
 .list-item {
   @apply relative block;
   @apply py-2 px-4;
-  @apply border border-gray-200;
+  @apply border border-gray-500;
+}
+
+.list-item + .list-item {
+  border-top-width: 0;
+}
+
+.list-item:first-child {
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}
+
+.list-item:last-child {
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
 }
 </style>
