@@ -1,5 +1,8 @@
 <template>
-  <div class="wrapper">asdasd</div>
+  <div class="wrapper">
+    <BaseInput :textarea="true" />
+    <BaseInput />
+  </div>
 </template>
 
 <script>
