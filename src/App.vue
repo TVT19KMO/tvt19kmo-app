@@ -2,6 +2,7 @@
   <div class="wrapper">
     <BaseInput :textarea="true" />
     <BaseInput />
+    <BaseButton>Hello World</BaseButton>
   </div>
 </template>
 
