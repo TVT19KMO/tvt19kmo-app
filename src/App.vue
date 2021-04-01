@@ -3,14 +3,16 @@
     <BaseInput :textarea="true" />
     <BaseInput />
     <TaskForm />
+    <TaskList />
   </div>
 </template>
 
 <script>
 import TaskForm from '@/components/tasks/TaskForm.vue';
+import TaskList from '@/components/tasks/TaskList.vue';
 
 export default {
-  components: { TaskForm },
+  components: { TaskForm, TaskList },
 };
 </script>
 
