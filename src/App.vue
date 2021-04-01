@@ -1,9 +1,18 @@
 <template>
-  <div class="wrapper">asdasd</div>
+  <div class="wrapper">
+    <BaseInput :textarea="true" />
+    <BaseInput />
+    <TaskForm />
+    <TaskList />
+  </div>
 </template>
 
 <script>
+import TaskForm from '@/components/tasks/TaskForm.vue';
+import TaskList from '@/components/tasks/TaskList.vue';
+
 export default {
+  components: { TaskForm, TaskList },
 };
 </script>
 
