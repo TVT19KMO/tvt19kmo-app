@@ -1,7 +1,7 @@
 <template>
   <BaseForm class="">
     <template #header>
-      <Header :type="h3" class="text-lg">Create Task</Header>
+      <Heading :type="h3" class="text-lg">Create Task</Heading>
     </template>
 
     <BaseInput type="text" name="task-name">
