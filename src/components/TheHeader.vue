@@ -9,9 +9,6 @@
         <li class="header-nav-item">
           <a @click="$emit('navigate', 'tasks')">Tasks</a>
         </li>
-        <li class="header-nav-item">
-          <a @click="$emit('navigate', 'rewards')">Rewards</a>
-        </li>
       </ul>
     </nav>
   </header>
