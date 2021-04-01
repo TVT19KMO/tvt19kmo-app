@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import TaskForm from '@/components/TaskForm.vue';
+import TaskForm from '@/components/tasks/TaskForm.vue';
 
 export default {
   components: { TaskForm },
