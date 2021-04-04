@@ -6,6 +6,7 @@
       <th scope="col">Points</th>
       <th scope="col">Room</th>
     </template>
+
     <template #default>
       <TaskListRow v-for="task in tasks" v-bind="task" :key="task.name" />
     </template>
@@ -13,28 +14,30 @@
 </template>
 
 <script>
-import faker from 'faker';
+import { getTasks } from '@/api';
+
 import TaskListRow from './TaskListRow.vue';
 
 export default {
   components: { TaskListRow },
+
   data() {
     return {
-      tasks: Array.from({ length: 10 }).map((_) => ({
-        name: faker.random.arrayElement([
-          'Empty trash',
-          'Dust windowsills',
-          'Dust baseboards',
-          'Sort out-of-place items',
-          'Make beds',
-          'Carry laundry',
-          'Carry laundry',
-        ]),
-        note: faker.lorem.sentence(),
-        points: faker.datatype.number(20),
-        room: faker.random.arrayElement(['kitchen', 'living room', 'restroom']),
-      })),
+      tasks: [],
+      isLoading: false,
     };
+  },
+
+  async mounted() {
+    this.isLoading = true;
+    try {
+      const { data: tasks } = await getTasks();
+      this.tasks = tasks;
+    } catch (e) {
+      // Add error handling.
+    } finally {
+      this.isLoading = false;
+    }
   },
 };
 </script>
