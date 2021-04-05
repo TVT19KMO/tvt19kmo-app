@@ -5,7 +5,6 @@
       <!-- TODO: User router -->
       <MainPage v-if="route === ''" />
       <TasksPage v-else-if="route === 'tasks'" />
-
     </main>
     <TheFooter class="fixed bottom-0" />
   </div>

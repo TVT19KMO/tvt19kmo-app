@@ -7,13 +7,13 @@
       <th scope="col">Room</th>
     </template>
     <template #default>
-      <TaskListRow v-for="task in tasks" v-bind="task" :key="task.name" />
+      <TaskListRow v-for="task in tasks" v-bind="task" :key="task.name" @delete="onDeleteTask" />
     </template>
   </BaseTable>
 </template>
 
 <script>
-import { getTasks } from '@/api';
+import { getTasks, deleteTask } from '@/api';
 
 import TaskListRow from './TaskListRow.vue';
 
@@ -37,6 +37,17 @@ export default {
     } finally {
       this.isLoading = false;
     }
+  },
+
+  methods: {
+    async onDeleteTask(id) {
+      try {
+        await deleteTask({ id });
+        this.tasks = this.tasks.filter((task) => task.id != id);
+      } catch (e) {
+        // Add error handling.
+      }
+    },
   },
 };
 </script>
