@@ -1,6 +1,6 @@
 <template>
   <label>
-    <slot name="label"></slot>
+    <slot name="label" />
     <component :is="componentType" v-bind="$attrs" />
   </label>
 </template>
