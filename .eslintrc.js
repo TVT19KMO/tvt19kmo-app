@@ -5,7 +5,7 @@ module.exports = {
     node: true,
   },
 
-  extends: ['plugin:vue/vue3-recommended', 'eslint:recommended', 'prettier', '@vue/airbnb'],
+  extends: ['plugin:vue/recommended', '@vue/prettier/recommended'],
   plugins: ['vue'],
 
   parserOptions: {
@@ -20,10 +20,7 @@ module.exports = {
 
   overrides: [
     {
-      files: [
-        '**/__tests__/*.{j,t}s?(x)',
-        '**/tests/unit/**/*.spec.{j,t}s?(x)',
-      ],
+      files: ['**/__tests__/*.{j,t}s?(x)', '**/tests/unit/**/*.spec.{j,t}s?(x)'],
       env: {
         jest: true,
       },
