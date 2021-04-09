@@ -7,35 +7,36 @@
       <th scope="col">Room</th>
     </template>
     <template #default>
-      <TaskListRow v-for="task in tasks" v-bind="task" :key="task.name" @delete="deleteTask" />
+      <TaskListRow
+        v-for="task in tasks"
+        v-bind="task"
+        :key="task.id"
+        @delete="deleteTask"
+        @edit="selectTask"
+      />
     </template>
   </BaseTable>
 </template>
 
 <script>
-import { computed, onMounted } from 'vue';
-import { useStore } from 'vuex';
+import { onMounted, defineComponent } from 'vue';
 
-import { types } from '@/store/tasks';
-
+import useTasks from '@/compositions/useTasks';
 import TaskListRow from './TaskListRow.vue';
 
-export default {
+export default defineComponent({
   components: { TaskListRow },
 
   setup() {
-    const store = useStore();
+    const { tasks, getTasks, deleteTask, selectTask } = useTasks();
 
     onMounted(async () => {
-      await store.dispatch(types.GET_TASKS);
+      await getTasks();
     });
 
-    return {
-      tasks: computed(() => store.state.tasks.tasks),
-      deleteTask: async (id) => await store.dispatch(types.DELETE_TASK, id),
-    };
+    return { tasks, deleteTask, selectTask };
   },
-};
+});
 </script>
 
 <style></style>
