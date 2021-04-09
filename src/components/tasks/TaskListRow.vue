@@ -6,8 +6,8 @@
     <td>{{ noteToShow }}</td>
     <td>{{ points }}</td>
     <td>{{ room }}</td>
-    <td class="flex">
-      <BaseButton>Edit</BaseButton>
+    <td class="flex space-x-2">
+      <BaseButton @click="$emit('edit', id)">Edit</BaseButton>
       <BaseButton @click="$emit('delete', id)">Delete</BaseButton>
     </td>
   </tr>
@@ -38,7 +38,7 @@ export default {
     },
   },
 
-  emits: ['delete'],
+  emits: ['edit', 'delete'],
 
   computed: {
     noteToShow() {
