@@ -16,7 +16,7 @@ export default {
 };
 </script>
 
-<style lang="postcss">
+<style lang="postcss" scoped>
 .h1,
 .h2,
 .h3,
