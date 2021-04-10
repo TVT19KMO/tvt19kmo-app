@@ -4,8 +4,8 @@
       <slot name="header"></slot>
     </header>
     <ul>
-      <li v-for="index in 3" :key="index" class="list-item" :class="{ hoverable }">
-        <slot>asd</slot>
+      <li v-for="(item, index) in items" :key="index" class="list-item" :class="{ hoverable }">
+        <slot name="default" :item="item">{{ index }}</slot>
       </li>
     </ul>
   </div>
@@ -20,11 +20,22 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    items: {
+      type: Array,
+      default: [],
+    },
+  },
+
+  watch: {
+    items(asd) {
+      console.log(asd.map(({ price }) => price));
+    },
   },
 };
 </script>
 
-<style lang="postcss">
+<style lang="postcss" scoped>
 .list {
   @apply flex flex-col rounded-md;
   @apply bg-dark;

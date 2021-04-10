@@ -10,6 +10,12 @@
     "dev": "vite"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-brands-svg-icons": "^5.15.3",
+    "@fortawesome/free-regular-svg-icons": "^5.15.3",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@fortawesome/vue-fontawesome": "^3.0.0-3",
+    "@stripe/stripe-js": "^1.13.2",
     "@vitejs/plugin-vue": "^1.1.5",
     "axios": "^0.21.1",
     "faker": "^5.5.2",
@@ -17,6 +23,7 @@
     "vite": "^2.1.5",
     "vue": "^3.0.11",
     "vue-loader": "^16.2.0",
+    "vue-use-stripe": "^0.1.1",
     "vuex": "^4.0.0"
   },
   "devDependencies": {
