@@ -1,5 +1,5 @@
 <template>
-  <div class="form-wrapper">
+  <div class="p-fluid p-grid">
     <header v-if="$slots.header">
       <slot name="header"></slot>
     </header>

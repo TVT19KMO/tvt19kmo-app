@@ -1,5 +1,6 @@
 export const state = () => ({
   tasks: [],
+  taskDifficulties: [],
   selectedTask: null,
 });
 

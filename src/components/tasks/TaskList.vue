@@ -1,4 +1,11 @@
 <template>
+  <DataTable :value="tasks">
+    <Column field="name" header="Name"></Column>
+    <Column field="note" header="Note"></Column>
+    <Column field="points" header="Points"></Column>
+    <Column field="room" header="Room"></Column>
+  </DataTable>
+  <!--
   <BaseTable>
     <template #head>
       <th scope="col">Name</th>
@@ -16,17 +23,15 @@
       />
     </template>
   </BaseTable>
+  -->
 </template>
 
 <script>
 import { onMounted, defineComponent } from 'vue';
 
 import useTasks from '@/compositions/useTasks';
-import TaskListRow from './TaskListRow.vue';
 
 export default defineComponent({
-  components: { TaskListRow },
-
   setup() {
     const { tasks, getTasks, deleteTask, selectTask } = useTasks();
 
