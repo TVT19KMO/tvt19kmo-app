@@ -1,7 +1,10 @@
 import { api } from './setup';
 
-export const createPaymentIntent = async ({ product }) =>
-  await api.post('payments/create-payment-intent', { items: [{ id: product }] });
+export const createCheckoutSession = async (id, { route }) =>
+  await api.post('payments/create-checkout-session', {
+    items: [{ price: id, quantity: 1 }],
+    route,
+  });
 
 export default {
   createPaymentIntent,
