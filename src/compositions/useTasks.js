@@ -10,7 +10,15 @@ export const useTasks = () => {
 
   const task = computed(() => store.state.tasks.selectedTask);
 
+  const taskDifficulties = computed(() => store.state.tasks.taskDifficulties);
+
   const getTasks = async () => await store.dispatch(types.GET_TASKS);
+
+  const getTaskDifficulties = async () => {
+    // Make sure difficulties are only fetched ones.
+    if (taskDifficulties.value.length > 0) return;
+    await store.dispatch(types.GET_TASK_DIFFICULTIES);
+  };
 
   const selectTask = (id) => store.commit(types.SELECT_TASK, id);
 
@@ -23,6 +31,8 @@ export const useTasks = () => {
   return {
     tasks,
     task,
+    taskDifficulties,
+    getTaskDifficulties,
     getTasks,
     selectTask,
     createTask,

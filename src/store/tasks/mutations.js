@@ -2,6 +2,7 @@ export const SET_TASKS = 'SET_TASKS';
 export const SELECT_TASK = 'SELECT_TASK';
 export const UPDATE_TASK = 'UPDATE_TASK';
 export const DELETE_TASK = 'DELETE_TASK';
+export const SET_TASK_DIFFICULTIES = 'SET_TASK_DIFFICULTIES';
 
 export const setTasks = (state, tasks) => (state.tasks = tasks);
 
@@ -13,11 +14,15 @@ export const updateTask = (state, task) => state.tasks.find(({ id }) => id == ta
 export const deleteTask = (state, taskId) =>
   (state.tasks = state.tasks.filter(({ id }) => id != taskId));
 
+export const setTaskDifficulties = (state, taskDifficulties) =>
+  (state.taskDifficulties = taskDifficulties);
+
 export const mutationTypes = {
   SET_TASKS,
   SELECT_TASK,
   UPDATE_TASK,
   DELETE_TASK,
+  SET_TASK_DIFFICULTIES,
 };
 
 export const mutations = {
@@ -25,6 +30,7 @@ export const mutations = {
   [SELECT_TASK]: selectTask,
   [UPDATE_TASK]: updateTask,
   [DELETE_TASK]: deleteTask,
+  [SET_TASK_DIFFICULTIES]: setTaskDifficulties,
 };
 
 export default mutations;

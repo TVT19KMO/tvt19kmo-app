@@ -1,18 +1,14 @@
 <template>
   <BaseModal class="w-96">
-    <template #header>
-      <Heading :type="'h2'">{{ titleText }}</Heading>
-    </template>
+    <template #header> Select the amount of purchase </template>
 
-    <BaseList v-if="!productToPurchase" #default="{ item: product }" :items="products">
+    <BaseList #default="{ item: product }" :items="products">
       <div class="flex justify-between items-center">
         <img class="w-20 h-20" :src="images[`coin${product.amount}`]" />
         <p>{{ product.amount }} coins</p>
-        <BaseButton @click="productToPurchase = product">{{ product.price }}€</BaseButton>
+        <StripeCheckoutButton :label="`${product.price}€`" :itemToPurchase="product.id" />
       </div>
     </BaseList>
-
-    <StripePurchase :item="productToPurchase" v-else #default="{}" />
   </BaseModal>
 </template>
 
@@ -22,7 +18,7 @@
  * @author JIkaheimo (Jaakko Ikäheimo)
  */
 
-import StripePurchase from '@/components/StripePurchase.vue';
+import StripeCheckoutButton from '@/components/StripeCheckoutButton.vue';
 
 import coin5000 from '@/assets/coin_5000.png';
 import coin10000 from '@/assets/coin_10000.png';
@@ -32,16 +28,7 @@ import { products as useProducts } from '@/compositions';
 import { onMounted } from 'vue-demi';
 
 export default {
-  components: { StripePurchase },
-
-  data: () => ({ productToPurchase: null }),
-
-  computed: {
-    titleText: ({ productToPurchase }) =>
-      productToPurchase
-        ? 'Please enter your card info'
-        : 'Please select the amount of coins to purchase',
-  },
+  components: { StripeCheckoutButton },
 
   setup() {
     const { products, getProducts } = useProducts();

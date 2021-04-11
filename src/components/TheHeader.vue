@@ -1,52 +1,45 @@
 <template>
-  <header class="bg-darker text-white flex items-center justify-between w-screen px-5">
-    <a class="header-title" @click="$emit('navigate', '')"
-      >Child<span class="text-primary">watch</span></a
-    >
+  <Menubar :model="items">
+    <template #start>
+      <a
+        class="font-semibold text-xl px-2 py-2 hover:bg-dark cursor-pointer"
+        @click="$router.push('/')"
+        >Child<span class="text-primary">watch</span></a
+      >
+    </template>
+  </Menubar>
 
-    <nav class="header-nav">
-      <ul class="mx space-x-5">
-        <li class="header-nav-item">
-          <a @click="$emit('navigate', 'tasks')">Tasks</a>
-          <FontAwesomeIcon @click="showModal = true" icon="wallet" />
-        </li>
-      </ul>
-    </nav>
-  </header>
-
-  <PurchaseModal v-if="showModal" @close="showModal = false" />
+  <PurchaseModal v-model:visible="showModal" @hide="showModal = false" />
 </template>
 
 <script>
+import Menubar from 'primevue/menubar';
 import PurchaseModal from '@/components/PurchaseModal.vue';
 
 export default {
   name: 'TheHeader',
   emits: ['navigate'],
-  components: { PurchaseModal },
+  components: { PurchaseModal, Menubar },
 
   data() {
     return {
       showModal: false,
+      items: [
+        {
+          label: 'Tasks',
+          icon: 'pi pi-fw pi-tags',
+          to: '/tasks',
+        },
+        {
+          label: 'Coins: 1000',
+          icon: 'pi pi-fw pi-wallet',
+          command: () => {
+            this.showModal = true;
+          },
+          class: 'ml-auto',
+        },
+      ],
     };
   },
 };
 </script>
-
-<style scoped lang="postcss">
-.header-title {
-  @apply font-semibold text-xl;
-}
-.header-nav {
-  @apply py-1;
-}
-li {
-  @apply inline-block;
-}
-a {
-  @apply inline-block p-4;
-}
-a:hover {
-  @apply bg-dark cursor-pointer;
-}
-</style>

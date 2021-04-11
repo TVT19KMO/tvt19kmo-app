@@ -1,10 +1,9 @@
 <template>
-  <div class="min-h-screen">
+  <div>
     <TheHeader @navigate="route = $event" />
     <main class="container mx-auto my-5">
       <!-- TODO: User router -->
-      <MainPage v-if="route === ''" />
-      <TasksPage v-else-if="route === 'tasks'" />
+      <router-view></router-view>
     </main>
     <TheFooter class="fixed bottom-0" />
   </div>
@@ -33,7 +32,6 @@ export default {
 
 <style lang="postcss">
 body {
-  @apply bg-gray-800;
-  @apply font-sans text-base font-normal;
+  background-color: #17212f;
 }
 </style>
