@@ -7,5 +7,5 @@ export const createCheckoutSession = async (id, { route }) =>
   });
 
 export default {
-  createPaymentIntent,
+  createCheckoutSession,
 };
