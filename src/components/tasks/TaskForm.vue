@@ -38,15 +38,15 @@ export default defineComponent({
   name: 'TaskForm',
 
   setup() {
-    const { task, updateTask, createTask, taskDifficulties, getTaskDifficulties } = useTasks();
+    const { task, updateTask, createTask, difficulties, getDifficulties } = useTasks();
 
     onMounted(async () => {
-      await getTaskDifficulties();
+      await getDifficulties();
     });
 
     return {
       task: computed(() => task.value || {}),
-      difficulties: taskDifficulties,
+      difficulties,
       updateTask,
     };
   },

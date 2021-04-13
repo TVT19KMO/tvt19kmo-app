@@ -3,6 +3,7 @@ export const SELECT_TASK = 'SELECT_TASK';
 export const UPDATE_TASK = 'UPDATE_TASK';
 export const DELETE_TASK = 'DELETE_TASK';
 export const SET_TASK_DIFFICULTIES = 'SET_TASK_DIFFICULTIES';
+export const SET_TASK_ROOMS = 'SET_TASK_ROOMS';
 
 export const setTasks = (state, tasks) => (state.tasks = tasks);
 
@@ -17,12 +18,15 @@ export const deleteTask = (state, taskId) =>
 export const setTaskDifficulties = (state, taskDifficulties) =>
   (state.taskDifficulties = taskDifficulties);
 
+export const setTaskRooms = (state, taskRooms) => (state.taskRooms = taskRooms);
+
 export const mutationTypes = {
   SET_TASKS,
   SELECT_TASK,
   UPDATE_TASK,
   DELETE_TASK,
   SET_TASK_DIFFICULTIES,
+  SET_TASK_ROOMS,
 };
 
 export const mutations = {
@@ -31,6 +35,7 @@ export const mutations = {
   [UPDATE_TASK]: updateTask,
   [DELETE_TASK]: deleteTask,
   [SET_TASK_DIFFICULTIES]: setTaskDifficulties,
+  [SET_TASK_ROOMS]: setTaskRooms,
 };
 
 export default mutations;

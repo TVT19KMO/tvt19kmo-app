@@ -10,14 +10,22 @@ export const useTasks = () => {
 
   const task = computed(() => store.state.tasks.selectedTask);
 
-  const taskDifficulties = computed(() => store.state.tasks.taskDifficulties);
+  const difficulties = computed(() => store.state.tasks.taskDifficulties);
+
+  const rooms = computed(() => store.state.tasks.taskRooms);
 
   const getTasks = async () => await store.dispatch(types.GET_TASKS);
 
-  const getTaskDifficulties = async () => {
+  const getDifficulties = async () => {
     // Make sure difficulties are only fetched ones.
-    if (taskDifficulties.value.length > 0) return;
+    if (difficulties.value.length > 0) return;
     await store.dispatch(types.GET_TASK_DIFFICULTIES);
+  };
+
+  const getRooms = async () => {
+    // Make sure rooms are only fetched ones.
+    if (rooms.value.length > 0) return;
+    await store.dispatch(types.GET_TASK_ROOMS);
   };
 
   const selectTask = (id) => store.commit(types.SELECT_TASK, id);
@@ -31,8 +39,10 @@ export const useTasks = () => {
   return {
     tasks,
     task,
-    taskDifficulties,
-    getTaskDifficulties,
+    rooms,
+    difficulties,
+    getDifficulties,
+    getRooms,
     getTasks,
     selectTask,
     createTask,

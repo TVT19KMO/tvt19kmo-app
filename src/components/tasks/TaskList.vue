@@ -2,44 +2,53 @@
   <DataTable :value="tasks">
     <Column field="name" header="Name"></Column>
     <Column field="note" header="Note"></Column>
-    <Column field="points" header="Points"></Column>
+    <Column field="difficulty" header="Difficulty"></Column>
     <Column field="room" header="Room"></Column>
+    <Column :exportable="false">
+      <template #body>
+        <Button icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" />
+        <Button icon="pi pi-trash" class="p-button-rounded p-button-warning" />
+      </template>
+    </Column>
   </DataTable>
-  <!--
-  <BaseTable>
-    <template #head>
-      <th scope="col">Name</th>
-      <th scope="col">Note</th>
-      <th scope="col">Points</th>
-      <th scope="col">Room</th>
-    </template>
-    <template #default>
-      <TaskListRow
-        v-for="task in tasks"
-        v-bind="task"
-        :key="task.id"
-        @delete="deleteTask"
-        @edit="selectTask"
-      />
-    </template>
-  </BaseTable>
-  -->
 </template>
 
 <script>
-import { onMounted, defineComponent } from 'vue';
+import { onMounted, defineComponent, computed } from 'vue';
 
 import useTasks from '@/compositions/useTasks';
 
+import { findById } from '@/utils';
+
 export default defineComponent({
   setup() {
-    const { tasks, getTasks, deleteTask, selectTask } = useTasks();
+    const {
+      tasks,
+      getTasks,
+      getRooms,
+      getDifficulties,
+      deleteTask,
+      selectTask,
+      rooms,
+      difficulties,
+    } = useTasks();
 
     onMounted(async () => {
-      await getTasks();
+      await Promise.all([getTasks(), getDifficulties(), getRooms()]);
     });
 
-    return { tasks, deleteTask, selectTask };
+    return {
+      tasks: computed(() => {
+        return tasks.value.map(({ room, difficulty, ...other }) => ({
+          ...other,
+          room: findById(rooms.value, room.id).name,
+          difficulty: findById(difficulties.value, difficulty.id).name,
+        }));
+      }),
+
+      deleteTask,
+      selectTask,
+    };
   },
 });
 </script>
