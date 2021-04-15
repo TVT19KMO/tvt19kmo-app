@@ -1,46 +1,51 @@
 <template>
-  <DataTable :value="tasks">
-    <Column field="name" header="Name"></Column>
-    <Column field="note" header="Note"></Column>
-    <Column field="points" header="Points"></Column>
-    <Column field="room" header="Room"></Column>
-  </DataTable>
-  <!--
-  <BaseTable>
-    <template #head>
-      <th scope="col">Name</th>
-      <th scope="col">Note</th>
-      <th scope="col">Points</th>
-      <th scope="col">Room</th>
-    </template>
-    <template #default>
-      <TaskListRow
-        v-for="task in tasks"
-        v-bind="task"
-        :key="task.id"
-        @delete="deleteTask"
-        @edit="selectTask"
-      />
-    </template>
-  </BaseTable>
-  -->
+  <div>
+    <Toolbar class="p-mb-4">
+      <template #left>
+        <Button
+          label="New"
+          icon="pi pi-plus"
+          class="p-button-success p-mr-2"
+          @click="$emit('create')"
+        />
+      </template>
+    </Toolbar>
+
+    <DataTable :value="tasks">
+      <Column field="name" header="Name"></Column>
+      <Column field="note" header="Note"></Column>
+      <Column field="difficulty" header="Difficulty"></Column>
+      <Column field="room" header="Room"></Column>
+      <Column :exportable="false">
+        <template #body="{ data: task }">
+          <Button
+            icon="pi pi-pencil"
+            class="p-button-rounded p-button-success p-mr-2"
+            @click="$emit('edit', task.id)"
+          />
+          <Button
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-warning"
+            @click="$emit('delete', task.id)"
+          />
+        </template>
+      </Column>
+    </DataTable>
+  </div>
 </template>
 
 <script>
-import { onMounted, defineComponent } from 'vue';
-
-import useTasks from '@/compositions/useTasks';
+import { defineComponent } from 'vue-demi';
 
 export default defineComponent({
-  setup() {
-    const { tasks, getTasks, deleteTask, selectTask } = useTasks();
-
-    onMounted(async () => {
-      await getTasks();
-    });
-
-    return { tasks, deleteTask, selectTask };
+  props: {
+    tasks: {
+      type: Array,
+      required: true,
+    },
   },
+
+  emits: ['edit', 'create', 'delete'],
 });
 </script>
 
