@@ -8,6 +8,8 @@ import '@stripe/stripe-js';
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
+import ClipLoader from 'vue-spinner/src/ClipLoader.vue';
+
 import InputText from 'primevue/inputtext';
 import Textarea from 'primevue/textarea';
 import Dropdown from 'primevue/dropdown';
@@ -17,6 +19,7 @@ import Card from 'primevue/card';
 import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
 import Toolbar from 'primevue/toolbar';
+import Password from 'primevue/password';
 
 import BaseModal from '@/components/BaseModal.vue';
 import BaseInput from '@/components/BaseInput.vue';
@@ -57,5 +60,7 @@ createApp(App)
   .component('BaseList', BaseList)
   .component('BaseModal', BaseModal)
   .component('Dropdown', Dropdown)
+  .component('Password', Password)
   .component('Card', Card)
+  .component('ClipLoader', ClipLoader)
   .mount('#app');

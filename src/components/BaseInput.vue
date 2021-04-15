@@ -1,35 +1,42 @@
 <template>
-  <label>
-    <slot name="label" />
-    <component
-      :is="componentType"
-      v-bind="$attrs"
-      :value="modelValue"
-      @input="$emit('update:modelValue', $event.target.value)"
-    />
-  </label>
+  <div class="p-field">
+    <label v-if="label" :for="$attrs.id">{{ label }}</label>
+    <component :is="component" v-bind="$attrs" :class="{ 'p-invalid': error }" />
+    <small v-if="error" class="p-error">{{ error }}</small>
+  </div>
 </template>
 
 <script>
 export default {
   name: 'BaseInput',
+
   inheritAttrs: false,
 
-  emits: ['update:modelValue'],
-
   props: {
-    // Flag indicating if the input is normal or textarea.
-    textarea: {
-      type: Boolean,
-      default: false,
+    kind: {
+      type: String,
+      default: 'input',
     },
-    modelValue: {
-      required: true,
+
+    label: {
+      type: String,
+      required: false,
+    },
+
+    error: {
+      type: String,
+      required: false,
     },
   },
 
   computed: {
-    componentType: ({ textarea }) => (textarea ? 'textarea' : 'input'),
+    component({ kind }) {
+      switch (kind) {
+        case 'password':
+          return 'Password';
+      }
+      return 'InputText';
+    },
   },
 };
 </script>

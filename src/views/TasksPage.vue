@@ -1,21 +1,23 @@
 <template>
-  <Heading type="h2">Tasks</Heading>
-  <div class="my-10 flex items-start space-x-5">
-    <TaskList
-      @create="createTask"
-      @edit="editTask"
-      @delete="deleteTask"
-      :tasks="tasks"
-      class="w-full lg:w-2/3"
-    />
-    <TaskEditModal
-      v-if="showTaskEdit"
-      @close="showTaskEdit = false"
-      @save="saveTask"
-      v-model:visible="showTaskEdit"
-      :difficulties="difficulties"
-      :rooms="rooms"
-    />
+  <div class="container mx-auto w-screen">
+    <h2 class="text-xl text-white my-5">Manage your tasks</h2>
+    <div class="my-10 flex items-start space-x-5">
+      <TaskList
+        @create="createTask"
+        @edit="editTask"
+        @delete="deleteTask"
+        :tasks="tasks"
+        class="w-full lg:w-2/3"
+      />
+      <TaskEditModal
+        v-if="showTaskEdit"
+        @close="showTaskEdit = false"
+        @save="saveTask"
+        v-model:visible="showTaskEdit"
+        :difficulties="difficulties"
+        :rooms="rooms"
+      />
+    </div>
   </div>
 </template>
 
