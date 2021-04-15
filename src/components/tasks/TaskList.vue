@@ -11,7 +11,7 @@
       </template>
     </Toolbar>
 
-    <DataTable :value="tasks">
+    <DataTable :value="tasks" responsiveLayout="scroll">
       <Column field="name" header="Name"></Column>
       <Column field="note" header="Note"></Column>
       <Column field="difficulty" header="Difficulty"></Column>

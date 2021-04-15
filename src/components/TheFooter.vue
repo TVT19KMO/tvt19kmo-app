@@ -1,5 +1,5 @@
 <template>
-  <footer>Footer text placeholder</footer>
+  <footer class="p-2 text-center text-white bg-dark w-full">Footer text placeholder</footer>
 </template>
 
 <script>
@@ -7,9 +7,3 @@ export default {
   name: 'TheFooter',
 };
 </script>
-
-<style scoped lang="postcss">
-footer {
-  @apply p-5 text-center text-white bg-darker w-full;
-}
-</style>
