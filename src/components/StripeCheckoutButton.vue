@@ -37,7 +37,7 @@ export default defineComponent({
         const {
           data: { id },
         } = await createCheckoutSession(itemToPurchase, {
-          route: window.location.href + route.path,
+          route: window.location.href,
         });
         console.log(window.location);
         const data = await stripe.value.redirectToCheckout({ sessionId: id });

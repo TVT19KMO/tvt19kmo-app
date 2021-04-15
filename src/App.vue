@@ -1,7 +1,7 @@
 <template>
   <div>
     <TheHeader @navigate="route = $event" />
-    <main class="container mx-auto my-5">
+    <main class="min-w-screen min-h-screen">
       <!-- TODO: User router -->
       <router-view></router-view>
     </main>
