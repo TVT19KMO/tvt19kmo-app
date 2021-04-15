@@ -1,55 +1,51 @@
 <template>
-  <DataTable :value="tasks">
-    <Column field="name" header="Name"></Column>
-    <Column field="note" header="Note"></Column>
-    <Column field="difficulty" header="Difficulty"></Column>
-    <Column field="room" header="Room"></Column>
-    <Column :exportable="false">
-      <template #body>
-        <Button icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" />
-        <Button icon="pi pi-trash" class="p-button-rounded p-button-warning" />
+  <div>
+    <Toolbar class="p-mb-4">
+      <template #left>
+        <Button
+          label="New"
+          icon="pi pi-plus"
+          class="p-button-success p-mr-2"
+          @click="$emit('create')"
+        />
       </template>
-    </Column>
-  </DataTable>
+    </Toolbar>
+
+    <DataTable :value="tasks">
+      <Column field="name" header="Name"></Column>
+      <Column field="note" header="Note"></Column>
+      <Column field="difficulty" header="Difficulty"></Column>
+      <Column field="room" header="Room"></Column>
+      <Column :exportable="false">
+        <template #body="{ data: task }">
+          <Button
+            icon="pi pi-pencil"
+            class="p-button-rounded p-button-success p-mr-2"
+            @click="$emit('edit', task.id)"
+          />
+          <Button
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-warning"
+            @click="$emit('delete', task.id)"
+          />
+        </template>
+      </Column>
+    </DataTable>
+  </div>
 </template>
 
 <script>
-import { onMounted, defineComponent, computed } from 'vue';
-
-import useTasks from '@/compositions/useTasks';
-
-import { findById } from '@/utils';
+import { defineComponent } from 'vue-demi';
 
 export default defineComponent({
-  setup() {
-    const {
-      tasks,
-      getTasks,
-      getRooms,
-      getDifficulties,
-      deleteTask,
-      selectTask,
-      rooms,
-      difficulties,
-    } = useTasks();
-
-    onMounted(async () => {
-      await Promise.all([getTasks(), getDifficulties(), getRooms()]);
-    });
-
-    return {
-      tasks: computed(() => {
-        return tasks.value.map(({ room, difficulty, ...other }) => ({
-          ...other,
-          room: findById(rooms.value, room.id).name,
-          difficulty: findById(difficulties.value, difficulty.id).name,
-        }));
-      }),
-
-      deleteTask,
-      selectTask,
-    };
+  props: {
+    tasks: {
+      type: Array,
+      required: true,
+    },
   },
+
+  emits: ['edit', 'create', 'delete'],
 });
 </script>
 

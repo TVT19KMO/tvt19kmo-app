@@ -16,6 +16,7 @@ import Column from 'primevue/column';
 import Card from 'primevue/card';
 import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
+import Toolbar from 'primevue/toolbar';
 
 import BaseModal from '@/components/BaseModal.vue';
 import BaseInput from '@/components/BaseInput.vue';
@@ -40,6 +41,7 @@ createApp(App)
   .use(store)
   .use(router)
   .use(PrimeVue)
+  .component('Toolbar', Toolbar)
   .component('Dialog', Dialog)
   .component('Button', Button)
   .component('FontAwesomeIcon', FontAwesomeIcon)
