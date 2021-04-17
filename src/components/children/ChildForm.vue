@@ -1,33 +1,67 @@
 <template>
-    <Card>
+    <Dialog
+        v-bind="$attrs"
+        :style="{ width: '450px' }"
+        header="Task Details"
+        :modal="true"
+        class="p-fluid"
+    >
         <template #title> Get Child </template>
 
-        <template #content>
-            <div class="p-fluid space-y-10">
-                <button type="button" text="Get Child"/>
+        <div class="p-fluid">
+        <div class="p-field">
+            <label for="task-name">Child Name</label>
+            <InputText
+            id="task-name"
+            type="text"
+            v-model.trim="name"
+            autofocus
+            :class="{ 'p-invalid': isSubmitted && !name }"
+            />
+            <small class="p-error" v-if="isSubmitted && !name">Name is required.</small>
+        </div>
 
-                <span class="p-field p-float-label">
-                    <InputText id="task-name" type="text" v-model="task.name" />
-                    <label for="task-name">Name</label>
-                </span>
+        <div class="p-field">
+            <label for="task-note">Note</label>
+            <Textarea id="task-note" type="text" v-model="note" rows="5" />
+        </div>
 
-                <span class="p-field p-float-label">
-                    <Textarea id="task-note" type="text" v-model="task.note" />
-                    <label for="task-note">Note</label>
-                </span>
+        <div class="p-field">
+            <Dropdown
+            v-model="room"
+            optionLabel="name"
+            optionValue="id"
+            :options="rooms"
+            placeholder="Select a room"
+            :class="{ 'p-invalid': isSubmitted && !room }"
+            />
+            <small class="p-error" v-if="isSubmitted && !room">Room is required.</small>
+        </div>
 
-                    <Dropdown
-                      optionLabel="Child"
-                      :options="Child1"
-                      placeholder="Select a Child to assign to"
-                    />
-            </div>
-        </template>
-        
+        <div class="p-field">
+            <Dropdown
+            v-model="difficulty"
+            optionLabel="name"
+            :options="difficulties"
+            optionValue="id"
+            placeholder="Select a difficulty"
+            :class="{ 'p-invalid': isSubmitted && !difficulty }"
+            >
+            <template #option="{ option: difficulty }">
+                <p>
+                {{ difficulty.name }} <span>({{ difficulty.reward }})</span>
+                </p>
+            </template>
+            </Dropdown>
+            <small class="p-error" v-if="isSubmitted && !difficulty">Difficulty is required.</small>
+        </div>
+        </div>
+
         <template #footer>
-            <Button icon="pi pi-check" type="button" label="Assign" />
+        <Button label="Cancel" icon="pi pi-times" class="p-button-text" @click="$emit('close')" />
+        <Button label="Save" icon="pi pi-check" class="p-button-text" @click="save" />
         </template>
-    </Card>
+  </Dialog>
 </template>
 
 <script>
