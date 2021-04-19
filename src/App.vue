@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <TheHeader @navigate="route = $event" />
-    <main class="min-w-screen min-h-screen">
+  <div class="min-w-screen min-h-screen">
+    <TheHeader class="fixed top-0" @navigate="route = $event" />
+    <main class="absolute top-14 bottom-10 w-full">
       <!-- TODO: User router -->
       <router-view></router-view>
     </main>
@@ -14,6 +14,9 @@ import TasksPage from '@/views/TasksPage.vue';
 import MainPage from '@/views/MainPage.vue';
 import TheHeader from '@/components/TheHeader.vue';
 import TheFooter from '@/components/TheFooter.vue';
+import { mapActions, mapGetters } from 'vuex';
+import { getInfo } from './api';
+import { FETCH_INFO } from './store/user/actions';
 
 export default {
   components: {
@@ -22,10 +25,25 @@ export default {
     TasksPage,
     MainPage,
   },
+
   data() {
     return {
       route: '',
     };
+  },
+
+  computed: {
+    ...mapGetters(['isAuthenticated']),
+  },
+
+  methods: {
+    ...mapActions([FETCH_INFO]),
+  },
+
+  async created() {
+    if (this.isAuthenticated) {
+      await this[FETCH_INFO]();
+    }
   },
 };
 </script>
