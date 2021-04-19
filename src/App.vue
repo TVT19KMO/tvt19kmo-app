@@ -12,6 +12,7 @@
 <script>
 import TasksPage from '@/views/TasksPage.vue';
 import MainPage from '@/views/MainPage.vue';
+import ChildPage from '@/views/ChildPage.vue';
 import TheHeader from '@/components/TheHeader.vue';
 import TheFooter from '@/components/TheFooter.vue';
 import { mapActions, mapGetters } from 'vuex';
@@ -24,6 +25,7 @@ export default {
     TheFooter,
     TasksPage,
     MainPage,
+    ChildPage,
   },
 
   data() {
