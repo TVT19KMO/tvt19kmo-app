@@ -1,7 +1,3 @@
-import { getField } from 'vuex-map-fields';
-
-export const getters = {
-    getField,
-};
+export const getters = {};
 
 export default getters;
