@@ -1,16 +1,16 @@
 import { api } from './setup';
 
-export const getTasks = async () => api.get('tasks');
+export const getTasks = async () => await api.get('tasks');
 
-export const getTaskDifficulties = async () => api.get('task-difficulties');
+export const getTaskDifficulties = async () => await api.get('task-difficulties');
 
-export const getTaskRooms = async () => api.get('task-rooms');
+export const getTaskRooms = async () => await api.get('task-rooms');
 
-export const deleteTask = async ({ id }) => api.delete(`tasks/${id}`);
+export const deleteTask = async ({ id }) => await api.delete(`tasks/${id}`);
 
-export const updateTask = async (task) => api.put(`tasks/${task.id}`, task);
+export const updateTask = async (task) => await api.put(`tasks/${task.id}`, task);
 
-export const createTask = async (task) => api.post(`tasks`, task);
+export const createTask = async (task) => await api.post(`tasks`, task);
 
 export default {
   getTasks,

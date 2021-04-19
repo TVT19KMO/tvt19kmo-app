@@ -1,20 +1,25 @@
 <template>
   <Dialog header="Header" :modal="true">
-    <template #header v-if="$slots.header" class="modal-header">
+    <template #header v-if="$slots.header">
       <slot name="header"></slot>
     </template>
 
-    <template #default v-if="$slots.default" class="modal-body">
+    <template #default v-if="$slots.default">
       <slot name="default"></slot>
     </template>
 
-    <template #footer v-if="$slots.footer" class="modal-footer">
+    <template #footer v-if="$slots.footer">
       <slot name="footer"></slot>
     </template>
   </Dialog>
 </template>
 
 <script>
+/**
+ * Use this component to display a modal window.
+ * @author JIkaheimo
+ */
+
 export default {
   name: 'BaseModal',
 };

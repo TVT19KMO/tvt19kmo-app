@@ -1,4 +1,3 @@
-import { updateField } from 'vuex-map-fields';
 import { emptyTask } from './state';
 import { serializeTask } from './utils';
 
@@ -15,7 +14,6 @@ export const setTasks = (state, tasks) => (state.tasks = tasks);
 
 export const selectTask = (state, taskId) => {
   const taskToSelect = state.tasks.find(({ id }) => id == taskId);
-  console.log(taskToSelect);
   state.selectedTask = serializeTask({ ...taskToSelect });
 };
 
@@ -49,7 +47,6 @@ export const mutationTypes = {
 };
 
 export const mutations = {
-  updateField,
   [ADD_TASK]: addTask,
   [SET_TASKS]: setTasks,
   [SELECT_TASK]: selectTask,

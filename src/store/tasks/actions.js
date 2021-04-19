@@ -11,6 +11,10 @@ import {
 
 import { mutationTypes } from './mutations';
 
+/**************
+ * CONSTANTS **
+ **************/
+
 export const GET_TASKS = 'GET_TASKS';
 export const GET_TASK_DIFFICULTIES = 'GET_TASK_DIFFICULTIES';
 export const GET_TASK_ROOMS = 'GET_TASK_ROOMS';
@@ -19,11 +23,23 @@ export const UPDATE_TASK = 'UPDATE_TASK';
 export const DELETE_TASK = 'DELETE_TASK';
 export const SAVE_TASK = 'SAVE_TASK';
 
+/**************
+ * FUNCTIONS **
+ **************/
+
+/**
+ * Fetches all tasks.
+ * @param {import('vuex').ActionContext} context
+ */
 export const getTasks = async ({ commit }) => {
   const { data: tasks } = await getTasks_();
   commit(mutationTypes.SET_TASKS, tasks);
 };
 
+/**
+ * Saves the selected task.
+ * @param {import('vuex').ActionContext} context
+ */
 export const saveTask = async ({ dispatch, state: { selectedTask } }) => {
   if (selectedTask.id) {
     await dispatch(UPDATE_TASK, selectedTask);
@@ -57,6 +73,10 @@ export const deleteTask = async ({ commit }, id) => {
   commit(mutationTypes.DELETE_TASK, id);
 };
 
+/**
+ * Fetches all task difficulties.
+ * @param {import('vuex').ActionContext} context
+ */
 export const getTaskDifficulties = async ({ commit }) => {
   const { data: taskDifficulties } = await getTaskDifficulties_();
   commit(mutationTypes.SET_TASK_DIFFICULTIES, taskDifficulties);

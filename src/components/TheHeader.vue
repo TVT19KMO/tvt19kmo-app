@@ -1,5 +1,5 @@
 <template>
-  <Menubar :model="isAuthenticated ? items : []">
+  <Menubar :model="items">
     <template #start>
       <a
         class="font-semibold text-xl px-2 py-2 hover:bg-dark cursor-pointer"
@@ -15,26 +15,31 @@
 <script>
 import Menubar from 'primevue/menubar';
 import PurchaseModal from '@/components/PurchaseModal.vue';
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 import { LOGOUT_USER } from '@/store/user/actions';
+import { mapFields } from 'vuex-map-fields';
 
 export default {
   name: 'TheHeader',
+
   emits: ['navigate'],
+
   components: { PurchaseModal, Menubar },
-
-  computed: {
-    ...mapGetters(['isAuthenticated']),
-  },
-
-  methods: {
-    ...mapActions([LOGOUT_USER]),
-  },
 
   data() {
     return {
       showModal: false,
-      items: [
+    };
+  },
+
+  computed: {
+    ...mapFields(['user.userData']),
+    ...mapGetters(['isAuthenticated']),
+
+    items({ isAuthenticated, userData }) {
+      if (!isAuthenticated) return [];
+
+      return [
         {
           label: 'Tasks',
           icon: 'pi pi-fw pi-tags',
@@ -46,7 +51,7 @@ export default {
           to: '/children',
         },
         {
-          label: 'Coins: 1000',
+          label: `Coins: ${userData?.balance}`,
           icon: 'pi pi-fw pi-wallet',
           command: () => {
             this.showModal = true;
@@ -61,8 +66,12 @@ export default {
             this.$router.push({ name: 'login' });
           },
         },
-      ],
-    };
+      ];
+    },
+  },
+
+  methods: {
+    ...mapActions([LOGOUT_USER]),
   },
 };
 </script>

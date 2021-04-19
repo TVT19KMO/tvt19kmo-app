@@ -15,5 +15,6 @@ export const store = {
     actions,
 };
   
-  export default store;
+export default store;
   
+
