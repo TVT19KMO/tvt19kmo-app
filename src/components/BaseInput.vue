@@ -1,8 +1,13 @@
 <template>
   <div class="p-field">
-    <label v-if="label" :for="$attrs.id">{{ label }}</label>
+    <slot name="label">
+      <label v-if="label" :for="$attrs.id">{{ label }}</label>
+    </slot>
     <component :is="component" v-bind="$attrs" :class="{ 'p-invalid': error }" />
-    <small v-if="error" class="p-error">{{ error }}</small>
+
+    <slot name="error">
+      <small v-if="error" class="p-error">{{ error }}</small>
+    </slot>
   </div>
 </template>
 
@@ -34,6 +39,8 @@ export default {
       switch (kind) {
         case 'password':
           return 'Password';
+        case 'dropdown':
+          return 'Dropdown';
       }
       return 'InputText';
     },
