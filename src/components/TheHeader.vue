@@ -41,6 +41,11 @@ export default {
           to: '/tasks',
         },
         {
+          label: 'Children',
+          icon: 'pi pi-fw pi-tags',
+          to: '/children',
+        },
+        {
           label: 'Coins: 1000',
           icon: 'pi pi-fw pi-wallet',
           command: () => {

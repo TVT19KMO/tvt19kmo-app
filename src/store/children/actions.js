@@ -3,7 +3,7 @@
 import {
     getChildren as getChildren_,
     assignTask as assignTask_,
-    completeTask as completeTask,
+    deleteTask as deleteTask_,
 } from '@/api/children';
 
 import { mutationTypes } from './mutations';
@@ -22,10 +22,10 @@ export const assignTask = async ({ dispatch, state: { selectedTask } }) => {
     await dispatch(ASSIGN_TASK, selectedTask);
 }
 
-export const completeTask = async ({ commit }, id) => {
-    await completeTask_({ id });
-    commit(mutationTypes.DELETE_TASK, id);
-  };
+// export const deleteTask = async ({ commit }, id) => {
+//     await deleteTask_({ id });
+//     commit(mutationTypes.DELETE_TASK, id);
+//   };
 
   export const actionTypes = {
     GET_CHILDREN,
@@ -36,7 +36,7 @@ export const completeTask = async ({ commit }, id) => {
   export const actions = {
     [GET_CHILDREN]: getChildren,
     [ASSIGN_TASK]: assignTask,
-    [DELETE_TASK]: deleteTask,
+    // [DELETE_TASK]: deleteTask,
   };
   
   export default actions;

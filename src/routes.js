@@ -36,6 +36,7 @@ export const routes = [
     path: '/children',
     component: ChildPage,
     name: 'children',
+    beforeEnter: ifAuthenticated,
   },
   {
     path: '/register',

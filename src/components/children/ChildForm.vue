@@ -65,13 +65,63 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue';
+import useVuelidate from '@vuelidate/core';
+import { required } from '@vuelidate/validators';
+import { mapFields } from 'vuex-map-fields';
 
 export default defineComponent({
-    setup() {
+  name: 'TaskEditModal',
 
+  props: {
+    difficulties: {
+      type: Array,
+      default: [],
     },
-})
+
+    rooms: {
+      type: Array,
+      default: [],
+    },
+  },
+
+  validations() {
+    return {
+      name: { required },
+      room: { required },
+      difficulty: { required },
+    };
+  },
+
+  methods: {
+    save() {
+      this.v$.$touch();
+      this.isSubmitted = true;
+      if (this.v$.$error) return;
+      this.$emit('save');
+    },
+  },
+
+  computed: {
+    ...mapFields([
+      'selectedTask.difficulty',
+      'selectedTask.room',
+      'selectedTask.note',
+      'selectedTask.name',
+    ]),
+  },
+
+  setup() {
+    const isSubmitted = ref(false);
+
+    return {
+      v$: useVuelidate(),
+      isSubmitted,
+    };
+  },
+
+  emits: ['save', 'close'],
+});
 </script>
 
 <style scoped lang="postcss"></style>
