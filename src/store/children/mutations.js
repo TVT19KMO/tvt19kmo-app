@@ -1,5 +1,3 @@
-import { updateField } from 'vuex-map-fields';
-import { selectedTask } from './state';
 import { serializeTask } from './utils';
 
 export const ASSIGN_TASK = 'ASSIGN_TASK';
@@ -24,7 +22,6 @@ export const mutationTypes = {
 };
 
 export const mutations = {
-  updateField,
   [GET_CHILDREN]: getChildren,
   [ASSIGN_TASK]: assignTask,
   [DELETE_TASK]: deleteTask,

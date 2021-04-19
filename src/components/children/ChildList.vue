@@ -35,17 +35,18 @@
 </template>
 
 <script>
+import useTasks from '@/compositions/useTasks';
 import { defineComponent } from 'vue-demi';
 
 export default defineComponent({
-  props: {
-    tasks: {
-      type: Array,
-      required: true,
-    },
-  },
-
   emits: ['edit', 'create', 'delete'],
+
+  setup() {
+    const { tasks } = useTasks();
+    return {
+      tasks,
+    };
+  },
 });
 </script>
 
