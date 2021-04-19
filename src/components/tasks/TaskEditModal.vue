@@ -61,29 +61,6 @@
       <Button label="Cancel" icon="pi pi-times" class="p-button-text" @click="$emit('close')" />
       <Button label="Save" icon="pi pi-check" class="p-button-text" @click="save" />
     </template>
-    <!--
-
-
-        <template #value="slotProps">
-          <div v-if="slotProps.value && slotProps.value.value">
-            <span :class="'product-badge status-' + slotProps.value.value">{{
-              slotProps.value.label
-            }}</span>
-          </div>
-          <div v-else-if="slotProps.value && !slotProps.value.value">
-            <span :class="'product-badge status-' + slotProps.value.toLowerCase()">{{
-              slotProps.value
-            }}</span>
-          </div>
-          <span v-else>
-            {{ slotProps.placeholder }}
-          </span>
-        </template>
-
-
-
-
-    -->
   </Dialog>
 </template>
 
@@ -127,10 +104,10 @@ export default defineComponent({
 
   computed: {
     ...mapFields([
-      'selectedTask.difficulty',
-      'selectedTask.room',
-      'selectedTask.note',
-      'selectedTask.name',
+      'tasks.selectedTask.difficulty',
+      'tasks.selectedTask.room',
+      'tasks.selectedTask.note',
+      'tasks.selectedTask.name',
     ]),
   },
 

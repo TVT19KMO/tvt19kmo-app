@@ -1,7 +1,7 @@
 import { store } from '@/store';
 
 import { createRouter, createWebHashHistory } from 'vue-router';
-import { MainPage, TasksPage, RegistrationPage, LoginPage } from './views';
+import { MainPage, TasksPage, AuthPage } from './views';
 
 const ifNotAuthenticated = (from, to, next) => {
   if (!store.getters.isAuthenticated) {
@@ -34,13 +34,13 @@ export const routes = [
   },
   {
     path: '/register',
-    component: RegistrationPage,
+    component: AuthPage,
     name: 'register',
     beforeEnter: ifNotAuthenticated,
   },
   {
     path: '/login',
-    component: LoginPage,
+    component: AuthPage,
     name: 'login',
     beforeEnter: ifNotAuthenticated,
   },

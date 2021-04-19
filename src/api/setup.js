@@ -12,7 +12,7 @@ export const api = axios.create({
 // Get stored auth token, if one is stored.
 const token = localStorage.getItem('user-token');
 if (token) {
-  axios.defaults.headers.common['Authorization'] = token;
+  api.defaults.headers.common['Authorization'] = 'Bearer ' + token;
 }
 
 export default api;

@@ -1,14 +1,16 @@
 <template>
-  <div class="container mx-auto w-screen">
-    <h2 class="text-xl text-white my-5">Manage your tasks</h2>
-    <div class="my-10 flex items-start space-x-5">
+  <div class="w-full md:container mx-3 md:mx-auto">
+    <h2 class="text-xl my-5 text-white">Manage your tasks</h2>
+    <div>
       <TaskList
         @create="createTask"
         @edit="editTask"
+        @assign="assignTask"
         @delete="deleteTask"
         :tasks="tasks"
         class="w-full lg:w-2/3"
       />
+
       <TaskEditModal
         v-if="showTaskEdit"
         @close="showTaskEdit = false"
@@ -17,13 +19,19 @@
         :difficulties="difficulties"
         :rooms="rooms"
       />
+
+      <TaskAssignModal
+        v-if="showTaskAssign"
+        @close="showTaskAssign = false"
+        v-model:visible="showTaskAssign"
+        :tasks="tasks"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import TaskList from '@/components/tasks/TaskList.vue';
-import TaskEditModal from '@/components/tasks/TaskEditModal.vue';
+import { TaskList, TaskEditModal, TaskAssignModal } from '@/components/tasks';
 
 import { DELETE_TASK, SAVE_TASK } from '@/store/tasks/actions';
 import { CLEAR_TASK, SELECT_TASK } from '@/store/tasks/mutations';
@@ -39,13 +47,13 @@ export default defineComponent({
   components: {
     TaskList,
     TaskEditModal,
+    TaskAssignModal,
   },
 
-  data() {
-    return {
-      showTaskEdit: false,
-    };
-  },
+  data: () => ({
+    showTaskEdit: false,
+    showTaskAssign: false,
+  }),
 
   methods: {
     ...mapMutations([SELECT_TASK, CLEAR_TASK]),
@@ -63,6 +71,10 @@ export default defineComponent({
     editTask(taskId) {
       this[SELECT_TASK](taskId);
       this.showTaskEdit = true;
+    },
+
+    assignTask() {
+      this.showTaskAssign = true;
     },
 
     saveTask() {
@@ -83,6 +95,7 @@ export default defineComponent({
       difficulties,
     } = useTasks();
 
+    // Fetch all required data.
     onMounted(async () => {
       await Promise.all([getDifficulties(), getRooms(), await getTasks()]);
     });
