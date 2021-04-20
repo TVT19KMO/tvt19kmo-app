@@ -7,6 +7,7 @@ import {
   updateTask as updateTask_,
   getTaskDifficulties as getTaskDifficulties_,
   getTaskRooms as getTaskRooms_,
+  getAssignedTasks as getAssignedTasks_,
 } from '@/api/tasks';
 
 import { mutationTypes } from './mutations';
@@ -18,6 +19,7 @@ import { mutationTypes } from './mutations';
 export const GET_TASKS = 'GET_TASKS';
 export const GET_TASK_DIFFICULTIES = 'GET_TASK_DIFFICULTIES';
 export const GET_TASK_ROOMS = 'GET_TASK_ROOMS';
+export const GET_ASSIGNED_TASKS = 'GET_ASSIGNED_TASKS';
 export const CREATE_TASK = 'CREATE_TASK';
 export const UPDATE_TASK = 'UPDATE_TASK';
 export const DELETE_TASK = 'DELETE_TASK';
@@ -28,7 +30,7 @@ export const SAVE_TASK = 'SAVE_TASK';
  **************/
 
 /**
- * Fetches all tasks.
+ * Fetches all tasks from the database and updates state.
  * @param {import('vuex').ActionContext} context
  */
 export const getTasks = async ({ commit }) => {
@@ -37,7 +39,7 @@ export const getTasks = async ({ commit }) => {
 };
 
 /**
- * Saves the selected task.
+ * Saves the selected task int the database.
  * @param {import('vuex').ActionContext} context
  */
 export const saveTask = async ({ dispatch, state: { selectedTask } }) => {
@@ -49,9 +51,9 @@ export const saveTask = async ({ dispatch, state: { selectedTask } }) => {
 };
 
 /**
- * Creates a new task.
+ * Creates a new task in the database and updates state.
  * @param {import('vuex').ActionContext} context
- * @param {*} taskToCreate
+ * @param {*} taskToCreate Task being created.
  */
 export const createTask = async ({ commit }, taskToCreate) => {
   const { data: createdTask } = await createTask_(taskToCreate);
@@ -59,15 +61,20 @@ export const createTask = async ({ commit }, taskToCreate) => {
 };
 
 /**
- * Updates a task.
+ * Updates a task in the database and updates state.
  * @param {import('vuex').ActionContext} context
- * @param {*} taskToUpdate
+ * @param {*} taskToUpdate Task being updated.
  */
 export const updateTask = async ({ commit }, taskToUpdate) => {
   const { data: updatedTask } = await updateTask_(taskToUpdate);
   commit(mutationTypes.UPDATE_TASK, updatedTask);
 };
 
+/**
+ * Deletes a task from database and updates state.
+ * @param {import('vuex').ActionContext} context
+ * @param {string} id The identifier of the task to delete.
+ */
 export const deleteTask = async ({ commit }, id) => {
   await deleteTask_({ id });
   commit(mutationTypes.DELETE_TASK, id);
@@ -82,9 +89,21 @@ export const getTaskDifficulties = async ({ commit }) => {
   commit(mutationTypes.SET_TASK_DIFFICULTIES, taskDifficulties);
 };
 
+/**
+ * Fetches all task rooms.
+ * @param {import('vuex').ActionContext} context
+ */
 export const getTaskRooms = async ({ commit }) => {
   const { data: taskRooms } = await getTaskRooms_();
   commit(mutationTypes.SET_TASK_ROOMS, taskRooms);
+};
+
+/**
+ * Fetches all assigned tasks.
+ */
+export const getAssignedTasks = async ({ commit }) => {
+  const { data: assignedTasks } = await getAssignedTasks_();
+  commit(mutationTypes.SET_ASSIGNED_TASKS, assignedTasks);
 };
 
 export const actionTypes = {
@@ -94,6 +113,7 @@ export const actionTypes = {
   UPDATE_TASK,
   GET_TASK_DIFFICULTIES,
   GET_TASK_ROOMS,
+  GET_ASSIGNED_TASKS,
 };
 
 export const actions = {
@@ -104,6 +124,7 @@ export const actions = {
   [DELETE_TASK]: deleteTask,
   [GET_TASK_DIFFICULTIES]: getTaskDifficulties,
   [GET_TASK_ROOMS]: getTaskRooms,
+  [GET_ASSIGNED_TASKS]: getAssignedTasks,
 };
 
 export default actions;

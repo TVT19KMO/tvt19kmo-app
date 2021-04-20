@@ -10,6 +10,8 @@ export const useTasks = () => {
 
   const task = computed(() => store.state.tasks.selectedTask);
 
+  const assignedTasks = computed(() => store.state.tasks.assignedTasks);
+
   const difficulties = computed(() => store.state.tasks.taskDifficulties);
 
   const rooms = computed(() => store.state.tasks.taskRooms);
@@ -28,6 +30,12 @@ export const useTasks = () => {
     await store.dispatch(types.GET_TASK_ROOMS);
   };
 
+  const getAssignedTasks = async () => {
+    if (assignedTasks.value.length > 0) return;
+    console.log('FETCHIN!');
+    await store.dispatch(types.GET_ASSIGNED_TASKS);
+  };
+
   const selectTask = (id) => store.commit(types.SELECT_TASK, id);
 
   const deleteTask = async (id) => await store.dispatch(types.DELETE_TASK, id);
@@ -39,9 +47,11 @@ export const useTasks = () => {
   return {
     tasks,
     task,
+    assignedTasks,
     rooms,
     difficulties,
     getDifficulties,
+    getAssignedTasks,
     getRooms,
     getTasks,
     selectTask,

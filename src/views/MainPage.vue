@@ -20,14 +20,28 @@
 
 <script>
 import ActivityChart from '@/components/ActivityChart.vue';
+import useTasks from '@/compositions/useTasks';
+import { onMounted } from 'vue-demi';
 
 export default {
   components: {
     ActivityChart,
   },
 
-  data() {
-    return {};
+  watch: {
+    assignedTasks(tasks) {
+      console.log(tasks);
+    },
+  },
+
+  setup() {
+    const { assignedTasks, getAssignedTasks } = useTasks();
+
+    onMounted(async () => {
+      await getAssignedTasks();
+    });
+
+    return { assignedTasks };
   },
 };
 </script>
