@@ -1,6 +1,6 @@
 <template>
   <div class="min-w-screen min-h-screen">
-    <TheHeader class="fixed top-0" @navigate="route = $event" />
+    <TheHeader />
     <main class="absolute top-14 bottom-10 w-full">
       <!-- TODO: User router -->
       <router-view></router-view>
@@ -16,7 +16,6 @@ import ChildPage from '@/views/ChildPage.vue';
 import TheHeader from '@/components/TheHeader.vue';
 import TheFooter from '@/components/TheFooter.vue';
 import { mapActions, mapGetters } from 'vuex';
-import { getInfo } from './api';
 import { FETCH_INFO } from './store/user/actions';
 
 export default {
@@ -26,12 +25,6 @@ export default {
     TasksPage,
     MainPage,
     ChildPage,
-  },
-
-  data() {
-    return {
-      route: '',
-    };
   },
 
   computed: {

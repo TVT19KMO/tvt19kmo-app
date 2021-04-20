@@ -9,52 +9,42 @@
     <template #title> Create Task </template>
 
     <div class="p-fluid">
-      <div class="p-field">
-        <label for="task-name">Name</label>
-        <InputText
-          id="task-name"
-          type="text"
-          v-model.trim="name"
-          autofocus
-          :class="{ 'p-invalid': isSubmitted && !name }"
-        />
-        <small class="p-error" v-if="isSubmitted && !name">Name is required.</small>
-      </div>
+      <BaseInput
+        label="Name"
+        id="task-name"
+        type="text"
+        v-model.trim="name"
+        :error="getErrorMessage('name')"
+        autofocus
+      />
 
-      <div class="p-field">
-        <label for="task-note">Note</label>
-        <Textarea id="task-note" type="text" v-model="note" rows="5" />
-      </div>
+      <BaseInput kind="textarea" label="Note" id="task-note" type="text" v-model="note" rows="5" />
 
-      <div class="p-field">
-        <Dropdown
-          v-model="room"
-          optionLabel="name"
-          optionValue="id"
-          :options="rooms"
-          placeholder="Select a room"
-          :class="{ 'p-invalid': isSubmitted && !room }"
-        />
-        <small class="p-error" v-if="isSubmitted && !room">Room is required.</small>
-      </div>
+      <BaseInput
+        kind="dropdown"
+        v-model="room"
+        optionLabel="name"
+        optionValue="id"
+        :options="rooms"
+        placeholder="Select a room"
+        :error="getErrorMessage('room')"
+      />
 
-      <div class="p-field">
-        <Dropdown
-          v-model="difficulty"
-          optionLabel="name"
-          :options="difficulties"
-          optionValue="id"
-          placeholder="Select a difficulty"
-          :class="{ 'p-invalid': isSubmitted && !difficulty }"
-        >
-          <template #option="{ option: difficulty }">
-            <p>
-              {{ difficulty.name }} <span>({{ difficulty.reward }})</span>
-            </p>
-          </template>
-        </Dropdown>
-        <small class="p-error" v-if="isSubmitted && !difficulty">Difficulty is required.</small>
-      </div>
+      <BaseInput
+        kind="dropdown"
+        v-model="difficulty"
+        optionLabel="name"
+        :options="difficulties"
+        optionValue="id"
+        placeholder="Select a difficulty"
+        :error="getErrorMessage('difficulty')"
+      >
+        <template #option="{ option: difficulty }">
+          <p>
+            {{ difficulty.name }} <span>({{ difficulty.reward }})</span>
+          </p>
+        </template>
+      </BaseInput>
     </div>
 
     <template #footer>
@@ -66,12 +56,14 @@
 
 <script>
 import { defineComponent, ref } from 'vue';
-import useVuelidate from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { mapFields } from 'vuex-map-fields';
+import useVuelidation from '@/compositions/useVuelidation';
 
 export default defineComponent({
   name: 'TaskEditModal',
+
+  emits: ['save', 'close'],
 
   props: {
     difficulties: {
@@ -95,10 +87,9 @@ export default defineComponent({
 
   methods: {
     save() {
-      this.v$.$touch();
-      this.isSubmitted = true;
-      if (this.v$.$error) return;
-      this.$emit('save');
+      this.submitForm(() => {
+        this.$emit('save');
+      });
     },
   },
 
@@ -111,16 +102,9 @@ export default defineComponent({
     ]),
   },
 
-  setup() {
-    const isSubmitted = ref(false);
-
-    return {
-      v$: useVuelidate(),
-      isSubmitted,
-    };
-  },
-
-  emits: ['save', 'close'],
+  setup: () => ({
+    ...useVuelidation(),
+  }),
 });
 </script>
 

@@ -21,14 +21,17 @@ export const addTask = ({ tasks }, task) => tasks.push(task);
 
 export const updateTask = (state, task) => {
   const index = state.tasks.findIndex(({ id }) => id == task.id);
-  console.log(index);
   state.tasks[index] = task;
 };
 
-export const deleteTask = (state, taskId) =>
-  (state.tasks = state.tasks.filter(({ id }) => id != taskId));
+export const deleteTask = (state, taskId) => {
+  console.log(state);
+  state.tasks = state.tasks.filter(({ id }) => id != taskId);
+};
 
-export const clearTask = (state) => (state.selectedTask = { ...emptyTask });
+export const clearTask = (state) => {
+  state.selectedTask = { ...emptyTask };
+};
 
 export const setTaskDifficulties = (state, taskDifficulties) =>
   (state.taskDifficulties = taskDifficulties);
