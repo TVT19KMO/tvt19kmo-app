@@ -1,5 +1,5 @@
 <template>
-  <Menubar class="fixed top-0" :model="items">
+  <Menubar class="fixed top-0 w-full z-50" :model="items">
     <template #start>
       <a
         class="font-semibold text-xl px-2 py-2 hover:bg-dark cursor-pointer"
