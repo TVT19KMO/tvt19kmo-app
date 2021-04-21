@@ -10,6 +10,8 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import ClipLoader from 'vue-spinner/src/ClipLoader.vue';
 
+import ToastService from 'primevue/toastservice';
+
 import InputText from 'primevue/inputtext';
 import Textarea from 'primevue/textarea';
 import Dropdown from 'primevue/dropdown';
@@ -20,6 +22,10 @@ import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
 import Toolbar from 'primevue/toolbar';
 import Password from 'primevue/password';
+import DataView from 'primevue/dataview';
+import Chip from 'primevue/chip';
+import Tag from 'primevue/tag';
+import Toast from 'primevue/toast';
 
 import BaseModal from '@/components/BaseModal.vue';
 import BaseInput from '@/components/BaseInput.vue';
@@ -29,7 +35,7 @@ import BaseList from '@/components/BaseList.vue';
 import BaseTable from '@/components/BaseTable.vue';
 import Heading from '@/components/Heading.vue';
 
-import store from '@/store';
+import { store } from '@/store';
 
 library.add(faWallet);
 
@@ -44,9 +50,11 @@ createApp(App)
   .use(store)
   .use(router)
   .use(PrimeVue)
+  .use(ToastService)
   .component('Toolbar', Toolbar)
   .component('Dialog', Dialog)
   .component('Button', Button)
+  .component('Toast', Toast)
   .component('FontAwesomeIcon', FontAwesomeIcon)
   .component('DataTable', DataTable)
   .component('InputText', InputText)
@@ -61,6 +69,9 @@ createApp(App)
   .component('BaseModal', BaseModal)
   .component('Dropdown', Dropdown)
   .component('Password', Password)
+  .component('DataView', DataView)
+  .component('Chip', Chip)
+  .component('Tag', Tag)
   .component('Card', Card)
   .component('ClipLoader', ClipLoader)
   .mount('#app');
