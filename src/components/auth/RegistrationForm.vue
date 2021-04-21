@@ -1,5 +1,5 @@
 <template>
-  <form class="p-fluid" @submit.prevent="$emit('submit', user)">
+  <BaseForm @submit.prevent="$emit('submit', user)">
     <BaseInput
       id="username"
       v-model.trim="user.username"
@@ -35,7 +35,7 @@
     <slot name="error"> </slot>
 
     <BaseButton :loading="isLoading" label="Register" type="submit" />
-  </form>
+  </BaseForm>
 </template>
 
 <script>

@@ -3,7 +3,12 @@
     <slot name="label">
       <label v-if="label" :for="$attrs.id">{{ label }}</label>
     </slot>
-    <component :is="component" v-bind="$attrs" :class="{ 'p-invalid': error }" />
+
+    <component :is="component" v-bind="$attrs" :class="{ 'p-invalid': error }">
+      <template v-for="(_, name) in $slots" v-slot:[name]="slotData"
+        ><slot :name="name" v-bind="slotData"
+      /></template>
+    </component>
 
     <slot name="error">
       <small v-if="error" class="p-error">{{ error }}</small>
@@ -41,11 +46,11 @@ export default {
           return 'Password';
         case 'dropdown':
           return 'Dropdown';
+        case 'textarea':
+          return 'Textarea';
       }
       return 'InputText';
     },
   },
 };
 </script>
-
-<style scoped lang="postcss"></style>
