@@ -1,11 +1,12 @@
 import state from './state';
 import { mutations, mutationTypes } from './mutations';
 import { actions, actionTypes } from './actions';
-import { getters } from './getters';
+import { getters, getterTypes } from './getters';
 
 export const types = {
   ...actionTypes,
   ...mutationTypes,
+  ...getterTypes,
 };
 
 export const store = {
@@ -16,4 +17,3 @@ export const store = {
 };
 
 export default store;
-

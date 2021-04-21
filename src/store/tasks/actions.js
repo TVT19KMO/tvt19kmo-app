@@ -16,6 +16,8 @@ export const CREATE_TASK = 'CREATE_TASK';
 export const UPDATE_TASK = 'UPDATE_TASK';
 export const DELETE_TASK = 'DELETE_TASK';
 export const SAVE_TASK = 'SAVE_TASK';
+export const ASSIGN_TASK = 'ASSIGN_TASK';
+export const COMPLETE_TASK = 'COMPLETE_TASK';
 
 /**************
  * FUNCTIONS **
@@ -99,6 +101,24 @@ export const getAssignedTasks = async ({ commit }) => {
   commit(mutationTypes.SET_ASSIGNED_TASKS, assignedTasks);
 };
 
+/**
+ * Assigns task to children.
+ * @param {import('vuex').ActionContext} context
+ */
+export const assignTask = async ({ commit }, assignment) => {
+  const { data } = await api.assignTask(assignment);
+  return { ...data };
+};
+
+/**
+ * Completes an assigned task.
+ * @param {import('vuex').ActionContext} context
+ */
+export const completeTask = async ({ commit }, id) => {
+  const { data } = await api.completeTask(id);
+  return { ...data };
+};
+
 /***********
  * EXPORTS *
  ***********/
@@ -107,18 +127,22 @@ export const actionTypes = {
   GET_TASKS,
   CREATE_TASK,
   DELETE_TASK,
+  ASSIGN_TASK,
   UPDATE_TASK,
   GET_TASK_DIFFICULTIES,
   GET_TASK_ROOMS,
   GET_ASSIGNED_TASKS,
+  COMPLETE_TASK,
 };
 
 export const actions = {
   [GET_TASKS]: getTasks,
   [SAVE_TASK]: saveTask,
+  [ASSIGN_TASK]: assignTask,
   [CREATE_TASK]: createTask,
   [UPDATE_TASK]: updateTask,
   [DELETE_TASK]: deleteTask,
+  [COMPLETE_TASK]: completeTask,
   [GET_TASK_DIFFICULTIES]: getTaskDifficulties,
   [GET_TASK_ROOMS]: getTaskRooms,
   [GET_ASSIGNED_TASKS]: getAssignedTasks,
