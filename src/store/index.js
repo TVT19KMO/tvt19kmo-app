@@ -28,4 +28,4 @@ export const types = {
   ...userTypes,
 };
 
-export default store;
+export default { store, ...types };

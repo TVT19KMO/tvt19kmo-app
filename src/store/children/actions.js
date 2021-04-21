@@ -13,11 +13,6 @@ export const getChildren = async ({ commit }) => {
   commit(mutationTypes.SET_CHILDREN, children);
 };
 
-export const assignTask = async ({ dispatch, state: { selectedTask } }) => {
-  const { data: task } = await assignTask_();
-  await dispatch(ASSIGN_TASK, selectedTask);
-};
-
 // export const deleteTask = async ({ commit }, id) => {
 //     await deleteTask_({ id });
 //     commit(mutationTypes.DELETE_TASK, id);
@@ -25,13 +20,11 @@ export const assignTask = async ({ dispatch, state: { selectedTask } }) => {
 
 export const actionTypes = {
   GET_CHILDREN,
-  ASSIGN_TASK,
   DELETE_TASK,
 };
 
 export const actions = {
   [GET_CHILDREN]: getChildren,
-  [ASSIGN_TASK]: assignTask,
   // [DELETE_TASK]: deleteTask,
 };
 
