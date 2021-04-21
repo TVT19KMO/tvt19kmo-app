@@ -1,14 +1,6 @@
 // @ts-check
 
-import {
-  getTasks as getTasks_,
-  deleteTask as deleteTask_,
-  createTask as createTask_,
-  updateTask as updateTask_,
-  getTaskDifficulties as getTaskDifficulties_,
-  getTaskRooms as getTaskRooms_,
-  getAssignedTasks as getAssignedTasks_,
-} from '@/api/tasks';
+import api from '@/api/tasks';
 
 import { mutationTypes } from './mutations';
 
@@ -34,7 +26,7 @@ export const SAVE_TASK = 'SAVE_TASK';
  * @param {import('vuex').ActionContext} context
  */
 export const getTasks = async ({ commit }) => {
-  const { data: tasks } = await getTasks_();
+  const { data: tasks } = await api.getTasks();
   commit(mutationTypes.SET_TASKS, tasks);
 };
 
@@ -56,7 +48,7 @@ export const saveTask = async ({ dispatch, state: { selectedTask } }) => {
  * @param {*} taskToCreate Task being created.
  */
 export const createTask = async ({ commit }, taskToCreate) => {
-  const { data: createdTask } = await createTask_(taskToCreate);
+  const { data: createdTask } = await api.createTask(taskToCreate);
   commit(mutationTypes.ADD_TASK, createdTask);
 };
 
@@ -66,7 +58,7 @@ export const createTask = async ({ commit }, taskToCreate) => {
  * @param {*} taskToUpdate Task being updated.
  */
 export const updateTask = async ({ commit }, taskToUpdate) => {
-  const { data: updatedTask } = await updateTask_(taskToUpdate);
+  const { data: updatedTask } = await api.updateTask(taskToUpdate);
   commit(mutationTypes.UPDATE_TASK, updatedTask);
 };
 
@@ -76,7 +68,7 @@ export const updateTask = async ({ commit }, taskToUpdate) => {
  * @param {string} id The identifier of the task to delete.
  */
 export const deleteTask = async ({ commit }, id) => {
-  await deleteTask_({ id });
+  await api.deleteTask({ id });
   commit(mutationTypes.DELETE_TASK, id);
 };
 
@@ -85,7 +77,7 @@ export const deleteTask = async ({ commit }, id) => {
  * @param {import('vuex').ActionContext} context
  */
 export const getTaskDifficulties = async ({ commit }) => {
-  const { data: taskDifficulties } = await getTaskDifficulties_();
+  const { data: taskDifficulties } = await api.getTaskDifficulties();
   commit(mutationTypes.SET_TASK_DIFFICULTIES, taskDifficulties);
 };
 
@@ -94,17 +86,22 @@ export const getTaskDifficulties = async ({ commit }) => {
  * @param {import('vuex').ActionContext} context
  */
 export const getTaskRooms = async ({ commit }) => {
-  const { data: taskRooms } = await getTaskRooms_();
+  const { data: taskRooms } = await api.getTaskRooms();
   commit(mutationTypes.SET_TASK_ROOMS, taskRooms);
 };
 
 /**
  * Fetches all assigned tasks.
+ * @param {import('vuex').ActionContext} context
  */
 export const getAssignedTasks = async ({ commit }) => {
-  const { data: assignedTasks } = await getAssignedTasks_();
+  const { data: assignedTasks } = await api.getAssignedTasks();
   commit(mutationTypes.SET_ASSIGNED_TASKS, assignedTasks);
 };
+
+/***********
+ * EXPORTS *
+ ***********/
 
 export const actionTypes = {
   GET_TASKS,
