@@ -1,11 +1,5 @@
 <template>
-  <Dialog
-    v-bind="$attrs"
-    :style="{ width: '450px' }"
-    header="Assign task"
-    :modal="true"
-    class="p-fluid"
-  >
+  <BaseModal v-bind="$attrs" :style="{ width: '450px' }" header="Assign task" class="p-fluid">
     <BaseInput
       :feedback="false"
       id="task"
@@ -31,31 +25,25 @@
       label="Child"
       kind="dropdown"
       v-model="child"
-      :error="getErrorMessage('task')"
+      :error="getErrorMessage('child')"
       :options="children"
       optionValue="id"
       optionLabel="name"
       placeholder="Select child you want to assign the tasks"
-    >
-      <template v-for="child in children" :key="child.name">
-        <p >
-          {{ child.name }} 
-        </p>
-      </template>
-    </BaseInput>
-    
+    />
+
     <template #footer>
       <Button label="Cancel" icon="pi pi-times" class="p-button-text" @click="$emit('close')" />
-      <Button label="Save" icon="pi pi-check" class="p-button-text" />
+      <Button label="Save" icon="pi pi-check" class="p-button-text" @click="save" />
     </template>
-  </Dialog>
+  </BaseModal>
 </template>
 
 <script>
 import useVuelidation from '@/compositions/useVuelidation';
 import { required } from '@vuelidate/validators';
 import { defineComponent } from 'vue';
-import axios from 'axios'
+import axios from 'axios';
 
 export default defineComponent({
   name: 'TaskAssignModal',
@@ -73,35 +61,37 @@ export default defineComponent({
     children: [],
   }),
 
-  mounted: async function() {
+  mounted: async function () {
     axios
-      .get('http://localhost:5000/api/children')    
+      .get('http://localhost:5000/api/children')
       .then((response) => {
-        
-        this.children = response.data 
-        console.log(response.data)
-        
+        this.children = response.data;
+        console.log(response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
-        this.errored = true
-      })
+        this.errored = true;
+      });
   },
 
   validations: () => ({
     task: { required },
-    
+    child: { required },
   }),
 
-  methods: {},
-
-  computed: {},
+  methods: {
+    save() {
+      this.submitForm(() => {
+        this.$emit('save', { task: this.task, children: [this.child] });
+      });
+    },
+  },
 
   setup: () => ({
     ...useVuelidation(),
   }),
 
-  emits: ['close','save'],
+  emits: ['close', 'save'],
 });
 </script>
 
