@@ -89,7 +89,6 @@ export default defineComponent({
       getTasks,
       getRooms,
       getDifficulties,
-      deleteTask,
       selectTask,
       rooms,
       difficulties,
@@ -110,7 +109,6 @@ export default defineComponent({
 
     return {
       tasks: filledTasks,
-      deleteTask,
       selectTask,
       rooms,
       difficulties,

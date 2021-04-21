@@ -1,7 +1,20 @@
-import state from './state';
+import state from "./state";
+import { mutations, mutationTypes } from './mutations';
+import { actions, actionTypes } from "./actions";
+import { getters } from "./getters";
 
-export const store = {
-  state,
+export const types = {
+    ...actionTypes,
+    ...mutationTypes,
 };
 
+export const store = {
+    state,
+    getters,
+    mutations,
+    actions,
+};
+  
 export default store;
+  
+
