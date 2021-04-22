@@ -15,12 +15,7 @@
       <template #title> {{ title }}</template>
 
       <template #content>
-        <component
-          :isLoading="isSubmitting"
-          :is="form"
-          :serverError="serverError"
-          @submit="onSubmit"
-        >
+        <component :isLoading="isSubmitting" :is="form" @submit="onSubmit">
           <template #error v-if="serverError">
             <p class="p-error mb-5">{{ serverError }}</p>
           </template>
@@ -31,7 +26,9 @@
         <router-link class="hover:underline" v-if="isRegistration" to="login"
           >Already have an account?</router-link
         >
-        <router-link class="hover:underline" v-else to="register">Create a new account</router-link>
+        <router-link class="hover:underline" v-else to="register">
+          Create a new account</router-link
+        >
       </template>
     </Card>
   </div>
@@ -87,7 +84,7 @@ export default {
     async onSubmit(user) {
       this.submitForm(async () => {
         await this[this.authHandler](user);
-        this.$router.push({ name: 'tasks' });
+        this.$router.push({ name: 'dashboard' });
       }, this.handleServerError);
     },
 

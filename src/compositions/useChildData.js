@@ -1,27 +1,20 @@
 import { useStore } from 'vuex';
 import { computed } from 'vue';
-
-import { types } from '@/store/children';
+import { GET_CHILDREN } from '@/store/children/actions';
 
 export const useChildData = () => {
   const store = useStore();
 
   const children = computed(() => store.state.children.children);
 
-  const task = computed(() => store.state.children.assignTask);
-
-  const getChildren = async () => await store.dispatch(types.GET_TASKS);
-
-  const assignTask = async () => await store.dispatch(types.ASSIGN_TASK);
-
-  const deleteTask = async (id) => await store.dispatch(types.DELETE_TASK, id);
+  const getChildren = async () => {
+    // TODO: Should this result be cached?
+    await store.dispatch(GET_CHILDREN);
+  };
 
   return {
     children,
-    task,
     getChildren,
-    assignTask,
-    deleteTask,
   };
 };
 

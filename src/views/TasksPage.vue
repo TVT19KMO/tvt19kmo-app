@@ -5,7 +5,7 @@
       <TaskList
         @create="createTask"
         @edit="editTask"
-        @assign="assignTask"
+        @assign="showTaskAssign = true"
         @delete="deleteTask"
         :tasks="tasks"
         class="w-full lg:w-2/3"
@@ -23,6 +23,7 @@
       <TaskAssignModal
         v-if="showTaskAssign"
         @close="showTaskAssign = false"
+        @save="assignTask"
         v-model:visible="showTaskAssign"
         :tasks="tasks"
       />
@@ -33,8 +34,9 @@
 <script>
 import { TaskList, TaskEditModal, TaskAssignModal } from '@/components/tasks';
 
-import { DELETE_TASK, SAVE_TASK } from '@/store/tasks/actions';
+import { ASSIGN_TASK, DELETE_TASK, SAVE_TASK } from '@/store/tasks/actions';
 import { CLEAR_TASK, SELECT_TASK } from '@/store/tasks/mutations';
+import { SET_BALANCE } from '@/store/user/mutations';
 
 import { onMounted, defineComponent, computed } from 'vue';
 
@@ -56,8 +58,8 @@ export default defineComponent({
   }),
 
   methods: {
-    ...mapMutations([SELECT_TASK, CLEAR_TASK]),
-    ...mapActions([DELETE_TASK, SAVE_TASK]),
+    ...mapMutations([SELECT_TASK, CLEAR_TASK, SET_BALANCE]),
+    ...mapActions([DELETE_TASK, SAVE_TASK, ASSIGN_TASK]),
 
     createTask() {
       this[CLEAR_TASK]();
@@ -73,8 +75,10 @@ export default defineComponent({
       this.showTaskEdit = true;
     },
 
-    assignTask() {
-      this.showTaskAssign = true;
+    async assignTask(assignment) {
+      const { balance } = await this[ASSIGN_TASK](assignment);
+      this[SET_BALANCE](balance);
+      this.showTaskAssign = false;
     },
 
     saveTask() {
@@ -96,7 +100,8 @@ export default defineComponent({
 
     // Fetch all required data.
     onMounted(async () => {
-      await Promise.all([getDifficulties(), getRooms(), await getTasks()]);
+      await Promise.all([getDifficulties(), getRooms()]);
+      await getTasks();
     });
 
     const filledTasks = computed(() => {

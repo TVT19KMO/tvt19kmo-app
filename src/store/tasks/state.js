@@ -9,6 +9,7 @@ export const state = () => ({
   tasks: [],
   taskDifficulties: [],
   taskRooms: [],
+  assignedTasks: [],
   selectedTask: emptyTask,
 });
 

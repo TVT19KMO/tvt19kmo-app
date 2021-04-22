@@ -26,12 +26,6 @@ export default {
       default: [],
     },
   },
-
-  watch: {
-    items(asd) {
-      console.log(asd.map(({ price }) => price));
-    },
-  },
 };
 </script>
 
