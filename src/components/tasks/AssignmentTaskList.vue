@@ -1,47 +1,48 @@
 <template>
-  <DataView layout="list" :paginator="true" :rows="5" :value="tasks">
+  <DataView layout="list" :paginator="true" :rows="4" :value="tasks">
     <template #header>
       <div class="p-grid p-nogutter">Assigned Tasks</div>
     </template>
 
-    <template #list="{ data: { task, assignee, assigned, id } }">
-      <div class="p-5 w-full">
-        <div class="flex space-x-5 justify-between">
-          <div>
-            <div class="text-lg font-bold">{{ task.name }}</div>
-            <i class="pi pi-user product-category-icon"></i
-            ><span class="product-category">{{ assignee.name }}</span>
-          </div>
-          <div class="flex space-x-2 items-center">
-            <Tag :value="task.room.name" rounded />
-            <Tag :value="task.difficulty.name" rounded />
-          </div>
-          <div class="space-x-3">
-            <span>{{ assigned }}</span>
-            <Button
-              v-if="!task.completed"
-              icon="pi pi-check"
-              @click="$emit('complete', id)"
-              label="Ready"
-            ></Button>
-          </div>
-        </div>
+    <template #empty>
+      <div class="my-4">
+        <template v-if="loading">
+          <ClipLoader class="mx-auto" v-if="true" :loading="true" color="white" size="3rem" />
+          <p class="text-center">Loading data...</p>
+        </template>
+        <template>
+          <p class="text-center">No data available.</p>
+        </template>
       </div>
+    </template>
+
+    <template #list="{ data }">
+      <AssignmentTaskListItem @complete="$emit('complete', $event)" :task-assignment="data" />
     </template>
   </DataView>
 </template>
 
 <script>
-export default {
+import { defineComponent } from 'vue-demi';
+import AssignmentTaskListItem from './AssignmentTaskListItem.vue';
+
+export default defineComponent({
+  components: { AssignmentTaskListItem },
+
   props: {
     tasks: {
       type: Array,
       required: true,
     },
+
+    loading: {
+      type: Boolean,
+      required: true,
+    },
   },
 
   emits: ['complete'],
-};
+});
 </script>
 
 <style></style>

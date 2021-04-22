@@ -8,6 +8,7 @@ export const UPDATE_TASK = 'UPDATE_TASK';
 export const DELETE_TASK = 'DELETE_TASK';
 export const SET_TASK_DIFFICULTIES = 'SET_TASK_DIFFICULTIES';
 export const SET_ASSIGNED_TASKS = 'SET_ASSIGNED_TASKS';
+export const UPDATE_ASSIGNED_TASK = 'UPDATE_ASSIGNED_TASK';
 export const SET_TASK_ROOMS = 'SET_TASK_ROOMS';
 export const CLEAR_TASK = 'CLEAR_TASK';
 
@@ -25,8 +26,12 @@ export const updateTask = (state, task) => {
   state.tasks[index] = task;
 };
 
+export const updateAssignedTask = (state, task) => {
+  const index = state.assignedTasks.findIndex(({ id }) => id == task.id);
+  state.assignedTasks[index] = task;
+};
+
 export const deleteTask = (state, taskId) => {
-  console.log(state);
   state.tasks = state.tasks.filter(({ id }) => id != taskId);
 };
 
@@ -49,6 +54,7 @@ export const mutationTypes = {
   DELETE_TASK,
   SET_TASK_DIFFICULTIES,
   SET_ASSIGNED_TASKS,
+  UPDATE_ASSIGNED_TASK,
   SET_TASK_ROOMS,
   CLEAR_TASK,
 };
@@ -62,6 +68,7 @@ export const mutations = {
   [SET_TASK_DIFFICULTIES]: setTaskDifficulties,
   [SET_TASK_ROOMS]: setTaskRooms,
   [SET_ASSIGNED_TASKS]: setAssignedTasks,
+  [UPDATE_ASSIGNED_TASK]: updateAssignedTask,
   [CLEAR_TASK]: clearTask,
 };
 
