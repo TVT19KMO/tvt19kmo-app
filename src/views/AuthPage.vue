@@ -84,7 +84,7 @@ export default {
     async onSubmit(user) {
       this.submitForm(async () => {
         await this[this.authHandler](user);
-        this.$router.push({ name: 'tasks' });
+        this.$router.push({ name: 'dashboard' });
       }, this.handleServerError);
     },
 

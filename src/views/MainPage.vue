@@ -1,9 +1,14 @@
 <template>
-  <div class="container mx-auto">
+  <div class="mx-5 md:container md:mx-auto">
     <Toast />
     <h2 class="text-xl my-5 text-white">Dashboard</h2>
     <div class="flex space-x-6 mt-6 items-start w-full">
-      <AssignmentTaskList @complete="completeTask" :tasks="ASSIGNED_TASKS" />
+      <AssignmentTaskList
+        class="w-full max-w-3xl"
+        @complete="completeTask"
+        :tasks="ASSIGNED_TASKS"
+        :loading="tasksLoading"
+      />
 
       <!--
     <BaseList class="main-list" hoverable>
@@ -20,7 +25,7 @@
 <script>
 import ActivityChart from '@/components/ActivityChart.vue';
 import useTasks from '@/compositions/useTasks';
-import { defineComponent, onMounted } from 'vue-demi';
+import { defineComponent, onMounted, ref } from 'vue-demi';
 import { mapActions, mapGetters } from 'vuex';
 import { ASSIGNED_TASKS } from '@/store/tasks/getters';
 import { COMPLETE_TASK } from '@/store/tasks/actions';
@@ -54,12 +59,16 @@ export default defineComponent({
   },
 
   setup() {
+    const tasksLoading = ref(true);
     const { getAssignedTasks, getDifficulties, getRooms } = useTasks();
 
     onMounted(async () => {
       await Promise.all([getDifficulties(), getRooms()]);
       await getAssignedTasks();
+      tasksLoading.value = false;
     });
+
+    return { tasksLoading };
   },
 });
 </script>

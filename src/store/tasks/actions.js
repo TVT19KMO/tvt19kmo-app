@@ -115,8 +115,8 @@ export const assignTask = async ({ commit }, assignment) => {
  * @param {import('vuex').ActionContext} context
  */
 export const completeTask = async ({ commit }, id) => {
-  const { data } = await api.completeTask(id);
-  return { ...data };
+  const { data: completedTask } = await api.completeTask(id);
+  commit(mutationTypes.UPDATE_ASSIGNED_TASK, completedTask);
 };
 
 /***********

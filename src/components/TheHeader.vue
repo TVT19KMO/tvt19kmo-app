@@ -1,9 +1,7 @@
 <template>
   <Menubar class="fixed top-0 w-full z-50" :model="items">
     <template #start>
-      <a
-        class="font-semibold text-xl px-2 py-2 hover:bg-dark cursor-pointer"
-        @click="$router.push('/')"
+      <a class="font-semibold text-xl px-2 py-2 cursor-pointer" @click="$router.push('/')"
         >Child<span class="text-primary">watch</span></a
       >
     </template>
@@ -15,7 +13,7 @@
 <script>
 import Menubar from 'primevue/menubar';
 import PurchaseModal from '@/components/PurchaseModal.vue';
-import { mapActions, mapGetters, mapState } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import { LOGOUT_USER } from '@/store/user/actions';
 import { mapFields } from 'vuex-map-fields';
 

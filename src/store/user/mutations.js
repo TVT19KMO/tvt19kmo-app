@@ -23,7 +23,6 @@ export const setAuthError = (state) => {
 };
 
 export const setUser = (state, user) => {
-  console.log(user);
   state.userData = user;
 };
 

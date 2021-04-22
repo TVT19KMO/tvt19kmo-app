@@ -40,10 +40,10 @@
 </template>
 
 <script>
+import useChildData from '@/compositions/useChildData';
 import useVuelidation from '@/compositions/useVuelidation';
 import { required } from '@vuelidate/validators';
-import { defineComponent } from 'vue';
-import axios from 'axios';
+import { defineComponent, onMounted } from 'vue';
 
 export default defineComponent({
   name: 'TaskAssignModal',
@@ -55,24 +55,12 @@ export default defineComponent({
     },
   },
 
+  emits: ['close', 'save'],
+
   data: () => ({
     task: '',
     child: '',
-    children: [],
   }),
-
-  mounted: async function () {
-    axios
-      .get('http://localhost:5000/api/children')
-      .then((response) => {
-        this.children = response.data;
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-        this.errored = true;
-      });
-  },
 
   validations: () => ({
     task: { required },
@@ -87,11 +75,18 @@ export default defineComponent({
     },
   },
 
-  setup: () => ({
-    ...useVuelidation(),
-  }),
+  setup: () => {
+    const { children, getChildren } = useChildData();
 
-  emits: ['close', 'save'],
+    onMounted(async () => {
+      await getChildren();
+    });
+
+    return {
+      children,
+      ...useVuelidation(),
+    };
+  },
 });
 </script>
 

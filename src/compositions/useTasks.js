@@ -32,7 +32,6 @@ export const useTasks = () => {
 
   const getAssignedTasks = async () => {
     if (assignedTasks.value.length > 0) return;
-    console.log('FETCHIN!');
     await store.dispatch(types.GET_ASSIGNED_TASKS);
   };
 
