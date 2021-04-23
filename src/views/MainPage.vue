@@ -1,7 +1,7 @@
 <template>
-  <div class="mx-5 md:container md:mx-auto">
+  <PageWrapper title="Dashboard">
     <Toast />
-    <h2 class="text-xl my-5 text-white">Dashboard</h2>
+
     <div class="flex space-x-6 mt-6 items-start w-full">
       <AssignmentTaskList
         class="w-full max-w-3xl"
@@ -19,7 +19,7 @@
 
     <ActivityChart class="h-full w-full bg-dark" />
     --></div>
-  </div>
+  </PageWrapper>
 </template>
 
 <script>

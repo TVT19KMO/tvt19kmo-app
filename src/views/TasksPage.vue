@@ -1,34 +1,31 @@
 <template>
-  <div class="w-full md:container mx-3 md:mx-auto">
-    <h2 class="text-xl my-5 text-white">Manage your tasks</h2>
-    <div>
-      <TaskList
-        @create="createTask"
-        @edit="editTask"
-        @assign="showTaskAssign = true"
-        @delete="deleteTask"
-        :tasks="tasks"
-        class="w-full lg:w-2/3"
-      />
+  <PageWrapper title="Manage your tasks">
+    <TaskList
+      @create="createTask"
+      @edit="editTask"
+      @assign="showTaskAssign = true"
+      @delete="deleteTask"
+      :tasks="tasks"
+      class="w-full lg:w-2/3"
+    />
 
-      <TaskEditModal
-        v-if="showTaskEdit"
-        @close="showTaskEdit = false"
-        @save="saveTask"
-        v-model:visible="showTaskEdit"
-        :difficulties="difficulties"
-        :rooms="rooms"
-      />
+    <TaskEditModal
+      v-if="showTaskEdit"
+      @close="showTaskEdit = false"
+      @save="saveTask"
+      v-model:visible="showTaskEdit"
+      :difficulties="difficulties"
+      :rooms="rooms"
+    />
 
-      <TaskAssignModal
-        v-if="showTaskAssign"
-        @close="showTaskAssign = false"
-        @save="assignTask"
-        v-model:visible="showTaskAssign"
-        :tasks="tasks"
-      />
-    </div>
-  </div>
+    <TaskAssignModal
+      v-if="showTaskAssign"
+      @close="showTaskAssign = false"
+      @save="assignTask"
+      v-model:visible="showTaskAssign"
+      :tasks="tasks"
+    />
+  </PageWrapper>
 </template>
 
 <script>

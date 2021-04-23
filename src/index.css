@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* prime vue custom styles */
+
+.p-button {
+  padding: 0.3rem 0.6rem !important;
+  font-size: 0.9rem !important;
+  font-weight: bold !important;
+}

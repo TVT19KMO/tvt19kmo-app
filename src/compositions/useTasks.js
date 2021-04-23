@@ -1,6 +1,5 @@
 import { useStore } from 'vuex';
 import { computed } from 'vue';
-
 import { types } from '@/store/tasks';
 
 export const useTasks = () => {
@@ -16,22 +15,23 @@ export const useTasks = () => {
 
   const rooms = computed(() => store.state.tasks.taskRooms);
 
-  const getTasks = async () => await store.dispatch(types.GET_TASKS);
+  const getTasks = async () => {
+    if (tasks.value.length) return;
+    await store.dispatch(types.GET_TASKS);
+  };
 
   const getDifficulties = async () => {
-    // Make sure difficulties are only fetched ones.
-    if (difficulties.value.length > 0) return;
+    if (difficulties.value.length) return;
     await store.dispatch(types.GET_TASK_DIFFICULTIES);
   };
 
   const getRooms = async () => {
-    // Make sure rooms are only fetched ones.
-    if (rooms.value.length > 0) return;
+    if (rooms.value.length) return;
     await store.dispatch(types.GET_TASK_ROOMS);
   };
 
   const getAssignedTasks = async () => {
-    if (assignedTasks.value.length > 0) return;
+    if (assignedTasks.value.length) return;
     await store.dispatch(types.GET_ASSIGNED_TASKS);
   };
 
@@ -43,16 +43,21 @@ export const useTasks = () => {
 
   const createTask = async (taskToCreate) => await store.dispatch(types.CREATE_TASK, taskToCreate);
 
+  const assignTask = async (taskToAssign) => await store.dispatch(types.ASSIGN_TASK, taskToAssign);
+
   return {
     tasks,
     task,
     assignedTasks,
     rooms,
     difficulties,
+
     getDifficulties,
     getAssignedTasks,
     getRooms,
     getTasks,
+
+    assignTask,
     selectTask,
     createTask,
     updateTask,

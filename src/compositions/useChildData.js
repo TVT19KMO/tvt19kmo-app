@@ -8,7 +8,7 @@ export const useChildData = () => {
   const children = computed(() => store.state.children.children);
 
   const getChildren = async () => {
-    // TODO: Should this result be cached?
+    if (children.value.length) return;
     await store.dispatch(GET_CHILDREN);
   };
 
