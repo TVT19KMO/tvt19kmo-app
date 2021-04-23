@@ -39,6 +39,12 @@
           @click="$emit('complete', taskAssignment.id)"
           label="Ready"
         ></Button>
+        <Button
+          class="action-button p-button-raised"
+          icon="pi pi-trash"
+          @click="deleteAssignedTask(taskAssignment.id)"
+          label="Delete"
+        ></Button>
       </div>
     </div>
   </div>
@@ -46,12 +52,31 @@
 
 <script>
 import { defineComponent } from 'vue-demi';
+import axios from 'axios';
 
 export default defineComponent({
   name: 'AssignmentTaskListItem',
 
   emits: ['complete'],
 
+  methods: {
+    
+    deleteAssignedTask(id) {
+      axios.delete('http://localhost:5000/api/assigned-tasks/' + id, {
+      data: { id },
+      headers: {
+          "Authorization": `Bearer ` + localStorage.getItem("user-token"),
+          "Content-Type": "application/json"}
+      })
+      .then(() => { 
+          console.log("Task deleted")
+      })
+      .catch(error => { 
+          console.log(error)
+      })
+    }
+  },
+  
   computed: {
     difficultySeverity: ({ taskAssignment }) => {
       switch (taskAssignment.task.difficulty.level) {
