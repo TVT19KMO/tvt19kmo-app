@@ -47,4 +47,5 @@ export default {
 body {
   background-color: #17212f;
 }
+
 </style>

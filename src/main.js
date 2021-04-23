@@ -27,6 +27,7 @@ import Chip from 'primevue/chip';
 import Tag from 'primevue/tag';
 import Toast from 'primevue/toast';
 
+import PageWrapper from '@/components/PageWrapper.vue';
 import BaseModal from '@/components/BaseModal.vue';
 import BaseInput from '@/components/BaseInput.vue';
 import BaseButton from '@/components/BaseButton.vue';
@@ -51,6 +52,7 @@ createApp(App)
   .use(router)
   .use(PrimeVue)
   .use(ToastService)
+  .component('PageWrapper', PageWrapper)
   .component('Toolbar', Toolbar)
   .component('Dialog', Dialog)
   .component('Button', Button)

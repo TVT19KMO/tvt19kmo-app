@@ -79,9 +79,3 @@ export default defineComponent({
 });
 </script>
 
-<style lang="postcss" scoped>
-.action-button {
-  padding: 0.3rem 0.6rem !important;
-  font-size: 0.9rem !important;
-}
-</style>
