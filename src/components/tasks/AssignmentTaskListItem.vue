@@ -31,20 +31,23 @@
       </div>
 
       <!-- Task actions -->
-      <div>
+      <div class="flex space-x-2">
         <Button
           class="action-button p-button-raised"
           v-if="!taskAssignment.finished"
           icon="pi pi-check"
-          @click="$emit('complete', taskAssignment.id)"
+          @click="onEvent('complete')"
           label="Ready"
-        ></Button>
+          :loading="isBusy"
+        />
+
         <Button
           class="action-button p-button-raised"
           icon="pi pi-trash"
-          @click="deleteAssignedTask(taskAssignment.id)"
+          :loading="isBusy"
+          @click="onEvent('delete')"
           label="Delete"
-        ></Button>
+        />
       </div>
     </div>
   </div>
@@ -52,32 +55,36 @@
 
 <script>
 import { defineComponent } from 'vue-demi';
-import axios from 'axios';
 
 export default defineComponent({
   name: 'AssignmentTaskListItem',
 
-  emits: ['complete'],
+  emits: ['complete', 'delete'],
+
+  data: () => ({
+    isBusy: false,
+  }),
+
+  props: {
+    taskAssignment: {
+      type: Object,
+      required: true,
+    },
+  },
 
   methods: {
-    
-    deleteAssignedTask(id) {
-      axios.delete('http://localhost:5000/api/assigned-tasks/' + id, {
-      data: { id },
-      headers: {
-          "Authorization": `Bearer ` + localStorage.getItem("user-token"),
-          "Content-Type": "application/json"}
-      })
-      .then(() => { 
-          console.log("Task deleted")
-      })
-      .catch(error => { 
-          console.log(error)
-      })
-    }
+    onEvent(event) {
+      this.isBusy = true;
+      this.$emit(event, this.taskAssignment.id);
+      this.$nextTick(() => {
+        this.isBusy = false;
+      });
+    },
   },
-  
+
   computed: {
+    isLoading: ({ isDeleting, isCompleting }) => isDeleting || isCompleting,
+
     difficultySeverity: ({ taskAssignment }) => {
       switch (taskAssignment.task.difficulty.level) {
         case 1:
@@ -94,13 +101,5 @@ export default defineComponent({
 
     difficultyText: ({ taskAssignment }) => taskAssignment.task.difficulty.name,
   },
-
-  props: {
-    taskAssignment: {
-      type: Object,
-      required: true,
-    },
-  },
 });
 </script>
-

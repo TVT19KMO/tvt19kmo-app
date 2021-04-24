@@ -39,9 +39,11 @@ import LoginForm from '@/components/auth/LoginForm.vue';
 import RegistrationForm from '@/components/auth/RegistrationForm.vue';
 
 import background from '@/assets/bg_1.jpeg';
-import { mapActions } from 'vuex';
-import { LOGIN_USER, REGISTER_USER } from '@/store/user/actions';
+import { mapActions, mapMutations } from 'vuex';
+import { types } from '@/store';
 import useVuelidation from '@/compositions/useVuelidation';
+
+const { LOGIN_USER, REGISTER_USER, RESET } = types;
 
 export default {
   name: 'AuthPage',
@@ -78,7 +80,12 @@ export default {
     authHandler: ({ isRegistration }) => (isRegistration ? REGISTER_USER : LOGIN_USER),
   },
 
+  mounted() {
+    this[RESET]();
+  },
+
   methods: {
+    ...mapMutations([RESET]),
     ...mapActions([LOGIN_USER, REGISTER_USER]),
 
     async onSubmit(user) {

@@ -9,3 +9,8 @@
   font-size: 0.9rem !important;
   font-weight: bold !important;
 }
+
+.p-button-rounderd {
+  width: 2rem !important;
+  height: 2rem !important;
+}

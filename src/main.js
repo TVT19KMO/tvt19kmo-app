@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import ClipLoader from 'vue-spinner/src/ClipLoader.vue';
 
 import ToastService from 'primevue/toastservice';
+import ConfirmationService from 'primevue/confirmationservice';
 
 import InputText from 'primevue/inputtext';
 import Textarea from 'primevue/textarea';
@@ -26,6 +27,7 @@ import DataView from 'primevue/dataview';
 import Chip from 'primevue/chip';
 import Tag from 'primevue/tag';
 import Toast from 'primevue/toast';
+import ConfirmDialog from 'primevue/confirmdialog';
 
 import PageWrapper from '@/components/PageWrapper.vue';
 import BaseModal from '@/components/BaseModal.vue';
@@ -52,11 +54,13 @@ createApp(App)
   .use(router)
   .use(PrimeVue)
   .use(ToastService)
+  .use(ConfirmationService)
   .component('PageWrapper', PageWrapper)
   .component('Toolbar', Toolbar)
   .component('Dialog', Dialog)
   .component('Button', Button)
   .component('Toast', Toast)
+  .component('ConfirmDialog', ConfirmDialog)
   .component('FontAwesomeIcon', FontAwesomeIcon)
   .component('DataTable', DataTable)
   .component('InputText', InputText)

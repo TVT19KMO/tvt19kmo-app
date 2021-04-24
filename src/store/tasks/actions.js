@@ -12,6 +12,7 @@ export const GET_TASKS = 'GET_TASKS';
 export const GET_TASK_DIFFICULTIES = 'GET_TASK_DIFFICULTIES';
 export const GET_TASK_ROOMS = 'GET_TASK_ROOMS';
 export const GET_ASSIGNED_TASKS = 'GET_ASSIGNED_TASKS';
+export const DELETE_ASSIGNED_TASK = 'DELETE_ASSIGNED_TASK';
 export const CREATE_TASK = 'CREATE_TASK';
 export const UPDATE_TASK = 'UPDATE_TASK';
 export const DELETE_TASK = 'DELETE_TASK';
@@ -119,6 +120,15 @@ export const completeTask = async ({ commit }, id) => {
   commit(mutationTypes.UPDATE_ASSIGNED_TASK, completedTask);
 };
 
+/**
+ * Deletes an assigned task.
+ * @param {import('vuex').ActionContext} context
+ */
+export const deleteAssignedTask = async ({ commit }, id) => {
+  await api.deleteAssignedTask(id);
+  commit(mutationTypes.DELETE_ASSIGNED_TASK, id);
+};
+
 /***********
  * EXPORTS *
  ***********/
@@ -132,6 +142,7 @@ export const actionTypes = {
   GET_TASK_DIFFICULTIES,
   GET_TASK_ROOMS,
   GET_ASSIGNED_TASKS,
+  DELETE_ASSIGNED_TASK,
   COMPLETE_TASK,
 };
 
@@ -146,6 +157,7 @@ export const actions = {
   [GET_TASK_DIFFICULTIES]: getTaskDifficulties,
   [GET_TASK_ROOMS]: getTaskRooms,
   [GET_ASSIGNED_TASKS]: getAssignedTasks,
+  [DELETE_ASSIGNED_TASK]: deleteAssignedTask,
 };
 
 export default actions;

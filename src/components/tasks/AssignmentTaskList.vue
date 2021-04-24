@@ -17,7 +17,11 @@
     </template>
 
     <template #list="{ data }">
-      <AssignmentTaskListItem @complete="$emit('complete', $event)" :task-assignment="data" />
+      <AssignmentTaskListItem
+        @complete="$emit('complete', $event)"
+        @delete="$emit('delete', $event)"
+        :task-assignment="data"
+      />
     </template>
   </DataView>
 </template>
@@ -35,13 +39,14 @@ export default defineComponent({
       required: true,
     },
 
+    // Is the contents of the list loaoding.
     loading: {
       type: Boolean,
       required: true,
     },
   },
 
-  emits: ['complete'],
+  emits: ['complete', 'delete'],
 });
 </script>
 
