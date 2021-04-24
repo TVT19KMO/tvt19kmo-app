@@ -5,7 +5,8 @@
     <div class="flex space-x-6 mt-6 items-start w-full">
       <AssignmentTaskList
         class="w-full max-w-3xl"
-        @complete="completeTask"
+        @complete="onTaskComplete"
+        @delete="onTaskDelete"
         :tasks="ASSIGNED_TASKS"
         :loading="tasksLoading"
       />
@@ -23,13 +24,17 @@
 </template>
 
 <script>
-import ActivityChart from '@/components/ActivityChart.vue';
-import useTasks from '@/compositions/useTasks';
 import { defineComponent, onMounted, ref } from 'vue-demi';
 import { mapActions, mapGetters } from 'vuex';
-import { ASSIGNED_TASKS } from '@/store/tasks/getters';
-import { COMPLETE_TASK } from '@/store/tasks/actions';
+
+import ActivityChart from '@/components/ActivityChart.vue';
 import AssignmentTaskList from '@/components/tasks/AssignmentTaskList.vue';
+
+import useTasks from '@/compositions/useTasks';
+import useToast from '@/compositions/useToast';
+
+import { ASSIGNED_TASKS } from '@/store/tasks/getters';
+import { COMPLETE_TASK, DELETE_ASSIGNED_TASK } from '@/store/tasks/actions';
 
 export default defineComponent({
   components: {
@@ -42,18 +47,23 @@ export default defineComponent({
   },
 
   methods: {
-    ...mapActions([COMPLETE_TASK]),
+    ...mapActions([COMPLETE_TASK, DELETE_ASSIGNED_TASK]),
 
-    async completeTask(id) {
+    async onTaskComplete(id) {
       try {
-        const res = await this[COMPLETE_TASK](id);
-      } catch (error) {
-        this.$toast.add({
-          severity: 'error',
-          summary: 'Error!',
-          detail: 'An error occured while marking a task as completed...',
-          life: 3000,
-        });
+        await this[COMPLETE_TASK](id);
+        this.showSuccess('Successfully marked the task as completed!');
+      } catch (_) {
+        this.showError('An error occured while marking a task as completed...');
+      }
+    },
+
+    async onTaskDelete(id) {
+      try {
+        await this[DELETE_ASSIGNED_TASK](id);
+        this.showSuccess('Successfully deleted the task!');
+      } catch (_) {
+        this.showError('An error occured while deleting the task..');
       }
     },
   },
@@ -68,7 +78,7 @@ export default defineComponent({
       tasksLoading.value = false;
     });
 
-    return { tasksLoading };
+    return { tasksLoading, ...useToast() };
   },
 });
 </script>

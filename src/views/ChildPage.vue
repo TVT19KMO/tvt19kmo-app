@@ -1,6 +1,6 @@
 <template>
   <PageWrapper title="Manage your children">
-    <ChildList @add="onAddChild" :children="children" class="w-full lg:w-2/3" />
+    <ChildList @remove-device="onRemoveDevice" @add="onAddChild" :children="children" />
 
     <ChildEditModal
       v-if="showChildEdit"
@@ -13,13 +13,16 @@
 </template>
 
 <script>
-import { ChildEditModal, ChildList } from '@/components/children';
-import useChildData from '@/compositions/useChildData';
-import { onMounted } from 'vue-demi';
-import { ADD_CHILD } from '@/store/children/actions';
 import { mapActions } from 'vuex';
+import { defineComponent, onMounted } from 'vue-demi';
 
-export default {
+import { ChildEditModal, ChildList } from '@/components/children';
+
+import useChildData from '@/compositions/useChildData';
+
+import { ADD_CHILD, REMOVE_CHILD_DEVICE } from '@/store/children/actions';
+
+export default defineComponent({
   components: {
     ChildEditModal,
     ChildList,
@@ -31,11 +34,15 @@ export default {
   }),
 
   methods: {
-    ...mapActions([ADD_CHILD]),
+    ...mapActions([ADD_CHILD, REMOVE_CHILD_DEVICE]),
 
     onAddChild() {
       this.child = null;
       this.showChildEdit = true;
+    },
+
+    onRemoveDevice(id) {
+      this[REMOVE_CHILD_DEVICE](id);
     },
 
     onSaveChild(child) {
@@ -57,7 +64,7 @@ export default {
       children,
     };
   },
-};
+});
 </script>
 
 <style></style>

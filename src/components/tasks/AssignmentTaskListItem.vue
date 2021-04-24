@@ -31,14 +31,23 @@
       </div>
 
       <!-- Task actions -->
-      <div>
+      <div class="flex space-x-2">
         <Button
           class="action-button p-button-raised"
           v-if="!taskAssignment.finished"
           icon="pi pi-check"
-          @click="$emit('complete', taskAssignment.id)"
+          @click="onEvent('complete')"
           label="Ready"
-        ></Button>
+          :loading="isBusy"
+        />
+
+        <Button
+          class="action-button p-button-raised"
+          icon="pi pi-trash"
+          :loading="isBusy"
+          @click="onEvent('delete')"
+          label="Delete"
+        />
       </div>
     </div>
   </div>
@@ -50,9 +59,32 @@ import { defineComponent } from 'vue-demi';
 export default defineComponent({
   name: 'AssignmentTaskListItem',
 
-  emits: ['complete'],
+  emits: ['complete', 'delete'],
+
+  data: () => ({
+    isBusy: false,
+  }),
+
+  props: {
+    taskAssignment: {
+      type: Object,
+      required: true,
+    },
+  },
+
+  methods: {
+    onEvent(event) {
+      this.isBusy = true;
+      this.$emit(event, this.taskAssignment.id);
+      this.$nextTick(() => {
+        this.isBusy = false;
+      });
+    },
+  },
 
   computed: {
+    isLoading: ({ isDeleting, isCompleting }) => isDeleting || isCompleting,
+
     difficultySeverity: ({ taskAssignment }) => {
       switch (taskAssignment.task.difficulty.level) {
         case 1:
@@ -69,13 +101,5 @@ export default defineComponent({
 
     difficultyText: ({ taskAssignment }) => taskAssignment.task.difficulty.name,
   },
-
-  props: {
-    taskAssignment: {
-      type: Object,
-      required: true,
-    },
-  },
 });
 </script>
-

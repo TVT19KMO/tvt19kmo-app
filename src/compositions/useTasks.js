@@ -1,6 +1,6 @@
 import { useStore } from 'vuex';
 import { computed } from 'vue';
-import { types } from '@/store/tasks';
+import { types } from '@/store';
 
 export const useTasks = () => {
   const store = useStore();

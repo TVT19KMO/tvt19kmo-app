@@ -17,7 +17,7 @@
       <Column class="hidden md:table-cell" field="note" header="Note"></Column>
       <Column field="difficulty" header="Difficulty"></Column>
       <Column field="room" header="Room"></Column>
-      <Column :exportable="false">
+      <Column>
         <template #body="{ data: task }">
           <div class="space-y-1" v-if="task.creator">
             <Button
