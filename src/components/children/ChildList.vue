@@ -1,5 +1,5 @@
 <template>
-  <ConfirmDialog></ConfirmDialog>
+  <ConfirmDialog />
 
   <Toolbar class="p-mb-4">
     <template #left>

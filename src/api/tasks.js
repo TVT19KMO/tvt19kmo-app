@@ -10,6 +10,8 @@ export const getAssignedTasks = async () => await api.get('assigned-tasks');
 
 export const assignTask = async (assignment) => await api.post('assigned-tasks', assignment);
 
+export const reassignTask = async ({ id }) => await api.post(`assigned-tasks/${id}/reassign`);
+
 export const deleteAssignedTask = async (id) => await api.delete(`assigned-tasks/${id}`);
 
 export const completeTask = async (id) => await api.post(`assigned-tasks/${id}/complete`);
@@ -27,6 +29,7 @@ export default {
   getAssignedTasks,
   getTaskRooms,
   deleteTask,
+  reassignTask,
   updateTask,
   createTask,
   completeTask,
