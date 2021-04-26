@@ -27,6 +27,7 @@ import DataView from 'primevue/dataview';
 import Chip from 'primevue/chip';
 import Tag from 'primevue/tag';
 import Toast from 'primevue/toast';
+import Menu from 'primevue/menu';
 import ConfirmDialog from 'primevue/confirmdialog';
 
 import PageWrapper from '@/components/PageWrapper.vue';
@@ -55,6 +56,7 @@ createApp(App)
   .use(PrimeVue)
   .use(ToastService)
   .use(ConfirmationService)
+  .component('Menu', Menu)
   .component('PageWrapper', PageWrapper)
   .component('Toolbar', Toolbar)
   .component('Dialog', Dialog)

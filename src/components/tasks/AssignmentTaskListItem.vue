@@ -32,21 +32,33 @@
 
       <!-- Task actions -->
       <div class="flex space-x-2">
-        <Button
-          class="action-button p-button-raised"
+        <BaseButton
+          class="p-button-rounded p-button-raised"
           v-if="!taskAssignment.finished"
           icon="pi pi-check"
           @click="onEvent('complete')"
-          label="Ready"
+          label="Mark as ready"
+          expandable
           :loading="isBusy"
         />
 
-        <Button
-          class="action-button p-button-raised"
+        <BaseButton
+          class="p-button-rounded p-button-raised p-button-raised"
+          v-else
+          icon="pi pi-undo"
+          :loading="isBusy"
+          label="Reassign"
+          expandable
+          @click="onEvent('reassign')"
+        />
+
+        <BaseButton
+          class="p-button-rounded p-button-raised p-button-warning"
           icon="pi pi-trash"
+          expandable
+          label="Delete"
           :loading="isBusy"
           @click="onEvent('delete')"
-          label="Delete"
         />
       </div>
     </div>
@@ -59,7 +71,7 @@ import { defineComponent } from 'vue-demi';
 export default defineComponent({
   name: 'AssignmentTaskListItem',
 
-  emits: ['complete', 'delete'],
+  emits: ['complete', 'reassign', 'delete'],
 
   data: () => ({
     isBusy: false,
@@ -75,7 +87,7 @@ export default defineComponent({
   methods: {
     onEvent(event) {
       this.isBusy = true;
-      this.$emit(event, this.taskAssignment.id);
+      this.$emit(event, this.taskAssignment);
       this.$nextTick(() => {
         this.isBusy = false;
       });

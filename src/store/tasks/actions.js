@@ -19,6 +19,7 @@ export const DELETE_TASK = 'DELETE_TASK';
 export const SAVE_TASK = 'SAVE_TASK';
 export const ASSIGN_TASK = 'ASSIGN_TASK';
 export const COMPLETE_TASK = 'COMPLETE_TASK';
+export const REASSIGN_TASK = 'REASSIGN_TASK';
 
 /**************
  * FUNCTIONS **
@@ -62,7 +63,7 @@ export const createTask = async ({ commit }, taskToCreate) => {
  */
 export const updateTask = async ({ commit }, taskToUpdate) => {
   const { data: updatedTask } = await api.updateTask(taskToUpdate);
-  commit(mutationTypes.UPDATE_TASK, updatedTask);
+  commit(mutationTypes.UPDATE_TASK, { id: taskToUpdate.id, task: updatedTask });
 };
 
 /**
@@ -108,23 +109,39 @@ export const getAssignedTasks = async ({ commit }) => {
  */
 export const assignTask = async ({ commit }, assignment) => {
   const { data } = await api.assignTask(assignment);
-  return { ...data };
+  const {
+    tasks: [assignedTask],
+  } = data;
+  commit(mutationTypes.ADD_ASSIGNED_TASK, assignedTask);
+  return { ...assignedTask };
 };
 
 /**
  * Completes an assigned task.
  * @param {import('vuex').ActionContext} context
  */
-export const completeTask = async ({ commit }, id) => {
+export const completeTask = async ({ commit }, { id }) => {
   const { data: completedTask } = await api.completeTask(id);
-  commit(mutationTypes.UPDATE_ASSIGNED_TASK, completedTask);
+  commit(mutationTypes.UPDATE_ASSIGNED_TASK, { id, task: completedTask });
+};
+
+/**
+ * Reassigns a completed task.
+ * @param {import('vuex').ActionContext} context
+ */
+export const reassignTask = async ({ commit }, task) => {
+  const { data } = await api.reassignTask(task);
+  const {
+    tasks: [reassignedTask],
+  } = data;
+  commit(mutationTypes.UPDATE_ASSIGNED_TASK, { id: task.id, task: reassignedTask });
 };
 
 /**
  * Deletes an assigned task.
  * @param {import('vuex').ActionContext} context
  */
-export const deleteAssignedTask = async ({ commit }, id) => {
+export const deleteAssignedTask = async ({ commit }, { id }) => {
   await api.deleteAssignedTask(id);
   commit(mutationTypes.DELETE_ASSIGNED_TASK, id);
 };
@@ -158,6 +175,7 @@ export const actions = {
   [GET_TASK_ROOMS]: getTaskRooms,
   [GET_ASSIGNED_TASKS]: getAssignedTasks,
   [DELETE_ASSIGNED_TASK]: deleteAssignedTask,
+  [REASSIGN_TASK]: reassignTask,
 };
 
 export default actions;

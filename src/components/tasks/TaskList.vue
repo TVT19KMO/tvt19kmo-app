@@ -19,18 +19,13 @@
       <Column field="room" header="Room"></Column>
       <Column>
         <template #body="{ data: task }">
-          <div class="space-y-1" v-if="task.creator">
-            <Button
-              icon="pi pi-pencil"
-              class="p-button-rounded p-button-success p-mr-2"
-              @click="$emit('edit', task.id)"
-            />
-            <Button
-              icon="pi pi-trash"
-              class="p-button-rounded p-button-warning"
-              @click="$emit('delete', task.id)"
-            />
-          </div>
+          <TaskListItem
+            @edit="$emit('edit', $event)"
+            @delete="$emit('delete', $event)"
+            :task="task"
+            class="space-y-1"
+            v-if="task.creator"
+          />
         </template>
       </Column>
     </DataTable>
@@ -40,7 +35,11 @@
 <script>
 import { defineComponent } from 'vue-demi';
 
+import TaskListItem from './TaskListItem.vue';
+
 export default defineComponent({
+  components: { TaskListItem },
+
   props: {
     tasks: {
       type: Array,

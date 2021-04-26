@@ -10,6 +10,7 @@ export const UPDATE_TASK = 'UPDATE_TASK';
 export const DELETE_TASK = 'DELETE_TASK';
 export const SET_TASK_DIFFICULTIES = 'SET_TASK_DIFFICULTIES';
 export const SET_ASSIGNED_TASKS = 'SET_ASSIGNED_TASKS';
+export const ADD_ASSIGNED_TASK = 'ADD_ASSIGNED_TASK';
 export const UPDATE_ASSIGNED_TASK = 'UPDATE_ASSIGNED_TASK';
 export const DELETE_ASSIGNED_TASK = 'DELETE_ASSIGNED_TASK';
 export const SET_TASK_ROOMS = 'SET_TASK_ROOMS';
@@ -25,12 +26,14 @@ export const selectTask = (state, taskId) => {
 
 export const addTask = ({ tasks }, task) => tasks.push(task);
 
-export const updateTask = ({ tasks }, task) => {
-  tasks[_.findIndex(tasks, { id: task.id })] = task;
+export const addAssignedTask = ({ assignedTasks }, task) => assignedTasks.push(task);
+
+export const updateTask = ({ tasks }, { task, id }) => {
+  tasks[_.findIndex(tasks, { id })] = task;
 };
 
-export const updateAssignedTask = ({ assignedTasks }, task) => {
-  assignedTasks[_.findIndex(assignedTasks, { id: task.id })] = task;
+export const updateAssignedTask = ({ assignedTasks }, { task, id }) => {
+  assignedTasks[_.findIndex(assignedTasks, { id })] = task;
 };
 
 export const deleteTask = ({ tasks }, id) => _.remove(tasks, { id });
@@ -68,6 +71,7 @@ export const mutationTypes = {
   DELETE_TASK,
   SET_TASK_DIFFICULTIES,
   SET_ASSIGNED_TASKS,
+  ADD_ASSIGNED_TASK,
   UPDATE_ASSIGNED_TASK,
   DELETE_ASSIGNED_TASK,
   SET_TASK_ROOMS,
@@ -84,6 +88,7 @@ export const mutations = {
   [SET_TASK_DIFFICULTIES]: setTaskDifficulties,
   [SET_TASK_ROOMS]: setTaskRooms,
   [SET_ASSIGNED_TASKS]: setAssignedTasks,
+  [ADD_ASSIGNED_TASK]: addAssignedTask,
   [UPDATE_ASSIGNED_TASK]: updateAssignedTask,
   [DELETE_ASSIGNED_TASK]: deleteAssignedTask,
   [CLEAR_TASK]: clearTask,
