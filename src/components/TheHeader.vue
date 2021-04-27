@@ -57,6 +57,11 @@ export default {
           class: 'ml-auto',
         },
         {
+          label: 'Settings',
+          icon: 'pi pi-fw pi-cog',
+          to: '/settings',
+        },
+        {
           label: 'Logout',
           icon: 'pi pi-fw pi-logout',
           command: async () => {
