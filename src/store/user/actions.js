@@ -26,8 +26,8 @@ export const registerUser = async ({ commit, dispatch }, user) => {
 
 export const loginUser = async ({ commit, dispatch }, user) => {
   const { data } = await login(user);
-  updateAuthData(data.token);
-  commit(SET_AUTH_SUCCESS, data.token);
+  updateAuthData(data.token, data.id);
+  commit(SET_AUTH_SUCCESS, data.token, data.id);
   await dispatch(FETCH_INFO);
 };
 

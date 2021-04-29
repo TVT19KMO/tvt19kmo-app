@@ -49,6 +49,11 @@ export default {
           to: '/children',
         },
         {
+          label: 'Statistics',
+          icon: 'pi pi-info-circle',
+          to: '/statistics'
+        },
+        {
           label: `Coins: ${userData?.balance}`,
           icon: 'pi pi-fw pi-wallet',
           command: () => {
