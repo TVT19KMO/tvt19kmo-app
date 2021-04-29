@@ -1,31 +1,23 @@
 <template>
-    <table class="table">
-        <div >
-            <h1>Game management statistics</h1>
-
+    <PageWrapper title="Game management statistics"></PageWrapper>
+    <div class="center">
+        <div class="box">
+            <div class="column1">
+                <h2>Tasks assigned</h2>            
+            </div>
+            <div class="column2">
+                <p> {{ tasksAssigned }} </p>
+            </div>
         </div>
-        
-        <div v-for="(stat,index) in statData" v-bind:key="index">
-            
+        <div class="box">
+            <div class="column1">
+                <h2>Tasks completed</h2>  
+            </div>
+            <div class="column2">
+                <p> {{ tasksCompleted }} </p>
+            </div>
         </div>
-
-        <div >
-            <h2 class="h2">Tasks assigned</h2>
-        </div>
-
-        <div>
-            <td class="td"> {{ tasksAssigned }} </td>
-        </div>
-
-        <div >
-            <h2 class="h2">Tasks completed</h2>
-        </div>
-
-        <div>
-            <td> {{ tasksCompleted }} </td>
-        </div>
-    </table> 
-
+    </div>
 </template>
 
 <script>
@@ -38,8 +30,7 @@ export default {
   
   data() {
     return {
-        statData: [],
-        
+        statData: [],    
   }
   },
 
@@ -86,20 +77,28 @@ export default {
 </script>
 
 <style>
-.table {
-    text-align: center;
-    display: block;
-    width: 50%;
-    margin-top: 30px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: bisque;
+.center {
+margin: 0 auto;
 }
-.h1 {
-    font-size: 30px;
+.column1 {
+margin-left: 20px;
+width: 10%;
+text-align: center;
+padding: 10px;
+color: white;
+background-color: #454d59;
 }
-.h2 {
-    text-align: left;
+.column2 {
+text-align: center;
+margin-left: 10px;
+width: 30%;
+padding: 10px;
+color: white;
+background-color: #454d59;
 }
-
+.box {
+display: flex;
+text-align: center;
+margin-bottom: 10px;
+}
 </style>
