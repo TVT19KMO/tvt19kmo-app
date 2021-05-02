@@ -26,4 +26,4 @@ https://code.visualstudio.com/docs/nodejs/vuejs-tutorial
 * framework - [Vue 3](https://v3.vuejs.org/guide/introduction.html)
 * tooling - [Vite](https://vitejs.dev/)
 * styling - [TailwindCSS 2](https://tailwindcss.com/docs)
-* native tools - NativeScript (WIP)
+* GUI library - [PrimeVUE](https://primefaces.org/primevue/showcase/#/)
