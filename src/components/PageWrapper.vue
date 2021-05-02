@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full mx-3 md:mx-10">
+  <div class="mx-3 md:mx-10">
     <h2 class="text-xl my-5 text-white">{{ title }}</h2>
     <slot></slot>
   </div>
@@ -13,6 +13,10 @@
  */
 
 export default {
+  data: () => ({
+    showSidebar: true,
+  }),
+
   props: {
     // Title of the page.
     title: {

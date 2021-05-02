@@ -113,7 +113,7 @@ export const assignTask = async ({ commit }, assignment) => {
     tasks: [assignedTask],
   } = data;
   commit(mutationTypes.ADD_ASSIGNED_TASK, assignedTask);
-  return { ...assignedTask };
+  return data;
 };
 
 /**
@@ -135,6 +135,7 @@ export const reassignTask = async ({ commit }, task) => {
     tasks: [reassignedTask],
   } = data;
   commit(mutationTypes.UPDATE_ASSIGNED_TASK, { id: task.id, task: reassignedTask });
+  return data;
 };
 
 /**
@@ -142,8 +143,9 @@ export const reassignTask = async ({ commit }, task) => {
  * @param {import('vuex').ActionContext} context
  */
 export const deleteAssignedTask = async ({ commit }, { id }) => {
-  await api.deleteAssignedTask(id);
+  const { data } = await api.deleteAssignedTask(id);
   commit(mutationTypes.DELETE_ASSIGNED_TASK, id);
+  return data;
 };
 
 /***********

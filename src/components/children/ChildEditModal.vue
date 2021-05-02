@@ -2,12 +2,10 @@
   <Dialog
     v-bind="$attrs"
     :style="{ width: '450px' }"
-    header="Task Details"
+    header="Add a child"
     :modal="true"
     class="p-fluid"
   >
-    <template #title> Create Task </template>
-
     <div class="p-fluid">
       <BaseInput
         label="Name"

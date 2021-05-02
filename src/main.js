@@ -29,6 +29,7 @@ import Tag from 'primevue/tag';
 import Toast from 'primevue/toast';
 import Menu from 'primevue/menu';
 import ConfirmDialog from 'primevue/confirmdialog';
+import Sidebar from 'primevue/sidebar';
 
 import PageWrapper from '@/components/PageWrapper.vue';
 import BaseModal from '@/components/BaseModal.vue';
@@ -64,6 +65,7 @@ createApp(App)
   .component('Toast', Toast)
   .component('ConfirmDialog', ConfirmDialog)
   .component('FontAwesomeIcon', FontAwesomeIcon)
+  .component('Sidebar', Sidebar)
   .component('DataTable', DataTable)
   .component('InputText', InputText)
   .component('Textarea', Textarea)

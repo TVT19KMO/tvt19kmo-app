@@ -23,7 +23,6 @@
 import { defineComponent, onMounted, ref } from 'vue-demi';
 import { mapGetters } from 'vuex';
 
-import ActivityChart from '@/components/ActivityChart.vue';
 import AssignmentTaskList from '@/components/tasks/AssignmentTaskList.vue';
 
 import useTasks from '@/compositions/useTasks';
@@ -32,7 +31,6 @@ import { ASSIGNED_TASKS } from '@/store/tasks/getters';
 
 export default defineComponent({
   components: {
-    ActivityChart,
     AssignmentTaskList,
   },
 

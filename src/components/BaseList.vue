@@ -29,39 +29,4 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
-.list {
-  @apply flex flex-col rounded-md;
-  @apply bg-dark;
-  @apply shadow-xl;
-}
-.list-header > * {
-  @apply font-semibold;
-}
-.list-item {
-  @apply text-green-300;
-}
-.list-item.hoverable:hover {
-  @apply bg-darker;
-}
-.list-item,
-.list-header {
-  @apply relative block;
-  @apply py-2 px-4;
-  @apply border border-gray-500;
-}
-.list-header {
-  border-bottom-width: 0;
-}
-.list-item + .list-item {
-  border-top-width: 0;
-}
-.list-item:first-child {
-  border-top-left-radius: inherit;
-  border-top-right-radius: inherit;
-}
-.list-item:last-child {
-  border-bottom-left-radius: inherit;
-  border-bottom-right-radius: inherit;
-}
-</style>
+<style lang="postcss" scoped></style>
