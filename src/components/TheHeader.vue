@@ -8,11 +8,14 @@
   </Menubar>
 
   <PurchaseModal v-model:visible="showModal" @hide="showModal = false" />
+  <SettingsModal v-model:visible="showSettings" @hide="showSettings = false" />
 </template>
 
 <script>
 import Menubar from 'primevue/menubar';
 import PurchaseModal from '@/components/PurchaseModal.vue';
+import SettingsModal from '@/components/SettingsModal.vue';
+
 import { mapActions, mapGetters } from 'vuex';
 import { LOGOUT_USER } from '@/store/user/actions';
 import { mapFields } from 'vuex-map-fields';
@@ -22,11 +25,12 @@ export default {
 
   emits: ['navigate'],
 
-  components: { PurchaseModal, Menubar },
+  components: { PurchaseModal, SettingsModal, Menubar },
 
   data() {
     return {
       showModal: false,
+      showSettings: false,
     };
   },
 
@@ -45,8 +49,21 @@ export default {
         },
         {
           label: 'Children',
-          icon: 'pi pi-fw pi-tags',
+          icon: 'pi pi-fw pi-eye',
           to: '/children',
+        },
+        {
+          label: 'Statistics',
+          icon: 'pi pi-info-circle',
+          to: '/statistics',
+        },
+        {
+          label: `${userData?.username}`,
+          icon: 'pi pi-fw pi-user',
+          class: 'ml-auto',
+          command: () => {
+            this.showSettings = true;
+          },
         },
         {
           label: `Coins: ${userData?.balance}`,
@@ -54,11 +71,13 @@ export default {
           command: () => {
             this.showModal = true;
           },
-          class: 'ml-auto',
+        },
+        {
+          separator: true,
         },
         {
           label: 'Logout',
-          icon: 'pi pi-fw pi-logout',
+          icon: 'pi pi-fw pi-sign-out',
           command: async () => {
             await this[LOGOUT_USER]();
             this.$router.push({ name: 'login' });

@@ -1,7 +1,5 @@
 <template>
-  <BaseModal class="w-96">
-    <template #header> Select the amount of purchase </template>
-
+  <BaseModal :style="{ width: '450px' }" header="Purchase coins">
     <BaseList #default="{ item: product }" :items="products">
       <div class="flex justify-between items-center">
         <img class="w-20 h-20" :src="images[`coin${product.amount}`]" />
@@ -41,5 +39,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

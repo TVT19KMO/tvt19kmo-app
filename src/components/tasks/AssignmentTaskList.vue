@@ -36,8 +36,9 @@ import { defineComponent } from 'vue-demi';
 import AssignmentTaskListItem from './AssignmentTaskListItem.vue';
 
 import { COMPLETE_TASK, DELETE_ASSIGNED_TASK, REASSIGN_TASK } from '@/store/tasks/actions';
-import { mapActions } from 'vuex';
+import { mapActions, mapMutations } from 'vuex';
 import { useConfirm, useToast } from '@/compositions';
+import { SET_BALANCE } from '@/store/user/mutations';
 
 export default defineComponent({
   components: { AssignmentTaskListItem },
@@ -60,6 +61,7 @@ export default defineComponent({
 
   methods: {
     ...mapActions([COMPLETE_TASK, DELETE_ASSIGNED_TASK, REASSIGN_TASK]),
+    ...mapMutations([SET_BALANCE]),
 
     onTaskComplete(task) {
       this.confirm('Are you sure you want to mark the task as completed?', async () => {
@@ -75,7 +77,8 @@ export default defineComponent({
     onTaskDelete(task) {
       this.confirm('Are you sure you want to delete the task?', async () => {
         try {
-          await this[DELETE_ASSIGNED_TASK](task);
+          const { balance } = await this[DELETE_ASSIGNED_TASK](task);
+          this[SET_BALANCE](balance);
           this.showSuccess('Successfully deleted the task!');
         } catch (_) {
           this.showError('An error occured while deleting the task..');
@@ -86,7 +89,8 @@ export default defineComponent({
     onTaskReassign(task) {
       this.confirm('Are you sure you want to reassign the task?', async () => {
         try {
-          await this[REASSIGN_TASK](task);
+          const { balance } = await this[REASSIGN_TASK](task);
+          this[SET_BALANCE](balance);
           this.showSuccess('Successfully reassigned the task!');
         } catch (_) {
           this.showError('An error occured while reassigning the task...');
