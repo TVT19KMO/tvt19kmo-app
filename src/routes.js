@@ -1,7 +1,7 @@
 import { store } from '@/store';
 
 import { createRouter, createWebHashHistory } from 'vue-router';
-import { MainPage, TasksPage, AuthPage, ChildPage, StatisticsPage } from './views';
+import { MainPage, TasksPage, AuthPage, ChildPage, StatisticsPage, SettingsPage } from './views';
 
 const ifNotAuthenticated = (from, to, next) => {
   if (!store.getters.isAuthenticated) {
@@ -42,6 +42,12 @@ export const routes = [
     path: '/statistics',
     component: StatisticsPage,
     name: 'statistics',
+    beforeEnter: ifAuthenticated,
+  },
+  {
+    path: '/settings',
+    component: SettingsPage,
+    name: 'settings',
     beforeEnter: ifAuthenticated,
   },
   {

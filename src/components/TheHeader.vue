@@ -76,6 +76,11 @@ export default {
           separator: true,
         },
         {
+          label: 'Settings',
+          icon: 'pi pi-fw pi-cog',
+          to: '/settings',
+        },
+        {
           label: 'Logout',
           icon: 'pi pi-fw pi-sign-out',
           command: async () => {
