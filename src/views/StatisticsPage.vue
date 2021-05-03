@@ -23,6 +23,22 @@
         </div>
         <br>
         <div class="box"> 
+            <h1>Task difficulties</h1>         
+           <div class="column">
+                <h2 class="headline">Easy tasks assigned</h2>
+                <p> {{ easyTaskDifficulty }} </p>
+            </div>
+            <div class="column">
+                <h2 class="headline">Medium tasks assigned</h2>
+                <p> {{ mediumTaskDifficulty }} </p>
+            </div> 
+            <div class="column">
+                <h2 class="headline">Hard tasks assigned</h2>
+                <p> {{ hardTaskDifficulty }} </p>
+            </div>  
+        </div>
+        <br>
+        <div class="box"> 
             <h1>Rooms</h1>         
            <div class="column">
                 <h2 class="headline">Tasks assigned into Livingroom</h2>
@@ -44,7 +60,10 @@
                 <h2 class="headline">Tasks assigned into Bedroom</h2>
                 <p> {{ tasksInBedroom }} </p>
             </div>
+            <br>
+            <br>
         </div>
+        <br>
     </div>
 </template>
 
@@ -80,10 +99,11 @@ export default {
 
   computed: {
         tasksCompleted () {
-            const rows = Object.keys(this.statData).length   
+            const rows = Object.keys(this.statData).length  
+            var stat = this.statData 
             var num = 0    
             for(var i=0; i< rows; i++) {
-                if(this.statData[i].finished != null || '') {
+                if(stat[i].finished != null || '') {
                     num++
                 }             
             }  
@@ -92,24 +112,65 @@ export default {
         coinsSpended () {
             const rows = Object.keys(this.statData).length   
             var coins = 0
+
             var stat = this.statData
            
             for(var i=0; i< rows; i++) {
                 if(stat[i].task.difficulty == '608837a0bfcad20c0e8ceca3') {        
-                    coins += 50                        
+                    coins += 50                   
                 }
             }
             for(var i=0; i< rows; i++) {
                 if(stat[i].task.difficulty == '608837a0bfcad20c0e8ceca4') {        
-                    coins += 100                      
+                    coins += 100                    
                 }
             }
             for(var i=0; i< rows; i++) {
                 if(stat[i].task.difficulty == '608837a0bfcad20c0e8ceca5') {        
                     coins += 200                          
                 }     
-            }     
+            }    
+            
             return coins      
+        },
+        easyTaskDifficulty () {
+            const rows = Object.keys(this.statData).length   
+            var easy = 0
+            var stat = this.statData
+           
+            for(var i=0; i< rows; i++) {
+                if(stat[i].task.difficulty == '608837a0bfcad20c0e8ceca3') {        
+                    easy++                       
+                }
+            }
+            return easy
+                 
+        },
+        mediumTaskDifficulty () {
+            const rows = Object.keys(this.statData).length   
+            var medium = 0
+            var stat = this.statData
+           
+            for(var i=0; i< rows; i++) {
+                if(stat[i].task.difficulty == '608837a0bfcad20c0e8ceca4') {        
+                    medium++                       
+                }
+            }
+            
+            return medium   
+        },
+        hardTaskDifficulty () {
+            const rows = Object.keys(this.statData).length   
+            var hard = 0
+            var stat = this.statData
+           
+            for(var i=0; i< rows; i++) {
+                if(stat[i].task.difficulty == '608837a0bfcad20c0e8ceca5') {        
+                    hard++                       
+                }      
+            }
+            
+            return hard    
         },
         tasksInLivingroom () {
             const rows = Object.keys(this.statData).length   
