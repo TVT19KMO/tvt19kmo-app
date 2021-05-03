@@ -45,8 +45,6 @@
                 <p> {{ tasksInBedroom }} </p>
             </div>
         </div>
-        
-
     </div>
 </template>
 
@@ -91,7 +89,6 @@ export default {
             }  
             return num         
         },
-
         coinsSpended () {
             const rows = Object.keys(this.statData).length   
             var coins = 0
@@ -111,11 +108,9 @@ export default {
                 if(stat[i].task.difficulty == '608837a0bfcad20c0e8ceca5') {        
                     coins += 200                          
                 }     
-            }
-            
+            }     
             return coins      
         },
-
         tasksInLivingroom () {
             const rows = Object.keys(this.statData).length   
             var tasks = 0
@@ -176,8 +171,6 @@ export default {
             }
             return tasks      
         },
-
-
         tasksAssigned () {
             return Object.keys(this.statData).length   
         }
