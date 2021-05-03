@@ -7,7 +7,8 @@ export const REGISTER_USER = 'REGISTER_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
 export const LOGIN_USER = 'LOGIN_USER';
 
-export const updateAuthData = (token) => {
+export const updateAuthData = (token, id) => {
+  localStorage.setItem('user-id', id);
   localStorage.setItem('user-token', token);
   api.defaults.headers.common['Authorization'] = 'Bearer ' + token;
 };
