@@ -1,61 +1,122 @@
 <template>
   <PageWrapper title="Game management statistics">
-    <div class="flex flex-wrap">
-      <div class="max-w-sm">
-        <ClipLoader v-if="isLoading" class="mx-auto" :loading="true" color="white" size="3rem" />
-        <vue3-chart-js
-          ref="difficultyChart"
-          :id="difficultiesModel.id"
-          :type="difficultiesModel.type"
-          :data="difficultiesModel.data"
-          :options="difficultiesModel.options"
-        ></vue3-chart-js>
+    <BaseInput
+      :feedback="false"
+      id="child"
+      kind="dropdown"
+      :options="childOptions"
+      optionValue="id"
+      v-model="child"
+      optionLabel="name"
+      placeholder="Select a child whose statistics you want to check"
+    />
+
+    <div class="flex flex-col md:flex-row w-full items-center">
+      <div class="w-64 max-w-lg flex flex-col justify-center space-y-3">
+        <Card class="w-56">
+          <template #title> Coins </template>
+
+          <template #content>
+            <div class="flex flex-col space-y-3">
+              <p>Spent: {{ coins.used }}</p>
+              <p>Transferred: {{ coins.transferred }}</p>
+            </div>
+          </template>
+        </Card>
+
+        <Card class="w-56">
+          <template #title>Tasks</template>
+
+          <template #content>
+            <div class="flex flex-col space-y-3">
+              <p>Assigned: {{ tasks.inProgress + tasks.finished }}</p>
+              <p>Completed: {{ tasks.finished }}</p>
+              <p>In progress: {{ tasks.inProgress }}</p>
+            </div>
+          </template>
+        </Card>
       </div>
 
-      <div class="max-w-sm">
-        <ClipLoader v-if="isLoading" class="mx-auto" :loading="true" color="white" size="3rem" />
-        <vue3-chart-js
-          ref="roomChart"
-          :id="roomsModel.id"
-          :type="roomsModel.type"
-          :data="roomsModel.data"
-          :options="roomsModel.options"
-        ></vue3-chart-js>
+      <div class="inline-flex flex-row flex-wrap justify-center">
+        <div class="max-w-sm">
+          <ClipLoader
+            v-if="isLoading"
+            class="mx-auto p-5"
+            :loading="true"
+            color="white"
+            size="3rem"
+          />
+          <vue3-chart-js
+            ref="difficultyChart"
+            :id="difficultiesModel.id"
+            :type="difficultiesModel.type"
+            :data="difficultiesModel.data"
+            :options="difficultiesModel.options"
+          ></vue3-chart-js>
+        </div>
+
+        <div class="max-w-sm">
+          <ClipLoader
+            v-if="isLoading"
+            class="mx-auto p-5"
+            :loading="true"
+            color="white"
+            size="3rem"
+          />
+          <vue3-chart-js
+            ref="roomChart"
+            :id="roomsModel.id"
+            :type="roomsModel.type"
+            :data="roomsModel.data"
+            :options="roomsModel.options"
+          ></vue3-chart-js>
+        </div>
       </div>
     </div>
   </PageWrapper>
 </template>
 
 <script>
-import { getStatistics } from '@/api';
+import { getStatistics, getStatisticsForChild } from '@/api';
 import { defineComponent, onMounted, ref } from 'vue-demi';
 import Vue3ChartJs from '@j-t-mcc/vue3-chartjs';
+import useChildData from '@/compositions/useChildData';
 
 export default defineComponent({
   name: 'StatisticsPage',
+
+  data: () => ({
+    child: false,
+  }),
 
   components: {
     Vue3ChartJs,
   },
 
-  data: () => ({
-    basicData: {
-      labels: ['A', 'B', 'C'],
-      datasets: [
-        {
-          data: [300, 50, 100],
-          backgroundColor: ['#42A5F5', '#66BB6A', '#FFA726'],
-          hoverBackgroundColor: ['#64B5F6', '#81C784', '#FFB74D'],
-        },
-      ],
-    },
-  }),
+  computed: {
+    childOptions: ({ children }) => [
+      {
+        id: false,
+        name: 'All children',
+      },
+      ...children,
+    ],
+  },
 
-  watch: {},
+  watch: {
+    async child(id) {
+      await this.fetchStatistics(id);
+    },
+  },
 
   setup() {
+    const { children, getChildren } = useChildData();
+
     const difficultyChart = ref(null);
     const roomChart = ref(null);
+
+    const coins = ref({});
+    const tasks = ref({});
 
     const isLoading = ref(true);
 
@@ -135,10 +196,22 @@ export default defineComponent({
       },
     };
 
-    onMounted(async () => {
+    const fetchStatistics = async (id = null) => {
+      isLoading.value = true;
+      let getter = null;
+      if (!id) {
+        getter = getStatistics;
+      } else {
+        getter = getStatisticsForChild;
+      }
       const {
-        data: { difficulties, rooms, tasks },
-      } = await getStatistics();
+        data: { difficulties, rooms, tasks: tasks_, coins: coins_ },
+      } = await getter(id);
+
+      await getChildren();
+
+      tasks.value = tasks_;
+      coins.value = coins_;
 
       difficultiesModel.data.labels = difficulties.labels;
       difficultiesModel.data.datasets = difficulties.datasets;
@@ -150,9 +223,19 @@ export default defineComponent({
 
       difficultyChart.value.update();
       roomChart.value.update();
+    };
+
+    onMounted(async () => {
+      await fetchStatistics();
     });
 
     return {
+      children,
+      fetchStatistics,
+
+      coins,
+      tasks,
+
       difficultyChart,
       roomChart,
 

@@ -2,7 +2,7 @@
   <Menubar class="fixed top-0 w-full z-50" :model="items">
     <template #start>
       <a class="font-semibold text-xl px-2 py-2 cursor-pointer" @click="$router.push('/')"
-        >Child<span class="text-primary">watch</span></a
+        >Sweeping<span class="text-primary">coins</span></a
       >
     </template>
   </Menubar>
