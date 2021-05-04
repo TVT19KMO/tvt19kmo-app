@@ -1,7 +1,7 @@
 <template>
   <div class="min-w-screen min-h-screen">
     <TheHeader />
-    <main class="absolute top-14 bottom-10 w-full">
+    <main class="absolute top-12 bottom-10 w-full">
       <!-- TODO: User router -->
       <router-view></router-view>
     </main>
@@ -47,5 +47,4 @@ export default {
 body {
   background-color: #17212f;
 }
-
 </style>
