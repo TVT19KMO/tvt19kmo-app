@@ -1,6 +1,7 @@
 # TVT19KMO Application
 This is an application developed for Product Design and Development course.
 
+Hosted at: [https://tvt19kmo.github.io/tvt19kmo-app/#/](https://tvt19kmo.github.io/tvt19kmo-app/#/)
 
 ### To start developing the app:
 1. Install [Vue CLI](https://cli.vuejs.org/guide/installation.html)
